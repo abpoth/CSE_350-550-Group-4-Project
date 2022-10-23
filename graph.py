@@ -17,7 +17,7 @@ from tkinter.filedialog import askopenfile
 
 root= tk.Tk()
 
-
+# Create a button to open the csv file
 root.geometry("1080x550")
 def open_file():
     file = filedialog.askopenfile(mode='r', filetypes=[('CSV files', '*.csv')])
@@ -38,7 +38,7 @@ mylist = Listbox(root, yscrollcommand = scroll_bar.set )
 
 # Create a Button
 b = ttk.Button(root, text="Browse", command=open_file,).pack(side= TOP)
-print(b)
+# print(b)
 
 def showgraph():
     # setting up env to show graph 
@@ -48,6 +48,10 @@ def showgraph():
     df1 = DataFrame(df[['Datetime (UTC)','Temp avg']])
     df2 = DataFrame(df[['Datetime (UTC)','Eda avg']])
     df3 = DataFrame(df[['Datetime (UTC)','Acc magnitude avg']])
+    df4 = DataFrame(df[['Datetime (UTC)','Movement intensity']])
+    df5 = DataFrame(df[['Datetime (UTC)','Steps count']])
+    df6 = DataFrame(df[['Datetime (UTC)','Rest']])
+    
 
     figure1 = plt.Figure(figsize=(20,2), dpi=55)
     ax1 = figure1.add_subplot(111)
@@ -72,6 +76,30 @@ def showgraph():
     df3 = df3[['Datetime (UTC)','Acc magnitude avg']]
     df3.plot(kind='line', legend=True, ax=ax3)
     ax3.set_title('Acc magnitude avg')
+
+    figure4 = plt.Figure(figsize=(20,2), dpi=55)
+    ax4 = figure4.add_subplot(111)
+    line4 = FigureCanvasTkAgg(figure4, root)
+    line4.get_tk_widget().pack(side= TOP)
+    df4 = df4[['Datetime (UTC)','Movement intensity']]
+    df4.plot(kind='line', legend=True, ax=ax4)
+    ax4.set_title('Movement intensity')
+
+    figure5 = plt.Figure(figsize=(20,2), dpi=55)
+    ax5 = figure5.add_subplot(111)
+    line5 = FigureCanvasTkAgg(figure5, root)
+    line5.get_tk_widget().pack(side= TOP)
+    df5 = df5[['Datetime (UTC)','Steps count']]
+    df5.plot(kind='line', legend=True, ax=ax5)
+    ax5.set_title('Steps count')
+
+    figure6 = plt.Figure(figsize=(20,2), dpi=55)
+    ax6 = figure6.add_subplot(111)
+    line6 = FigureCanvasTkAgg(figure6, root)
+    line6.get_tk_widget().pack(side= TOP)
+    df6 = df6[['Datetime (UTC)','Rest']]
+    df6.plot(kind='line', legend=True, ax=ax6)
+    ax6.set_title('Rest')
     
     mylist.pack( side = LEFT, fill = BOTH )
   
