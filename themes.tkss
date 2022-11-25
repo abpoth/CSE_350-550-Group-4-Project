@@ -1,0 +1,10 @@
+Tk{
+    background: "#565657";
+}
+
+Button{
+    background: "#00ced1";
+    activebackground: "#1e90ff";
+    font: 'Times';
+    relief: "ridge";
+}
