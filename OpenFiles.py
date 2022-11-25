@@ -18,8 +18,8 @@ class Paricipant(tk.Toplevel):
         self.participant310 = tk.Button(self,text="Participant 310")
         self.participant311 = tk.Button(self,text="Participant 311")
         self.participant312 = tk.Button(self,text="Participant 312")
-        
-        self.Jan18_2020 = tk.Button(self,text="2020-01-18", variable18=self.tclicked, value='20200118')
+
+        self.Jan18_2020 = tk.Button(self,text="2020-01-18")
         self.Jan18_2020.config(command= lambda btn=self.Jan18_2020: self.showall(btn))
         self.Jan18_2020.grid(row=1,column=0)
  
