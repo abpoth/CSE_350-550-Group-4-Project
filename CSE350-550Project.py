@@ -77,115 +77,9 @@ class MainScreen(tk.Frame):
 class Paricipant(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-
-        participant310 = tk.Button(
-            self,
-            text="Participant 310",
-            command=lambda: controller.show_frame(Paricipant), 
-        )
-        participant310["activebackground"] = "#1e90ff"
-        participant310["bg"] = "#00ced1"
-        ft3 = tkFont.Font(family='Times',size=28)
-        participant310["font"] = ft3
-        participant310["fg"] = "#393d49"
-        participant310["justify"] = "center"
-        participant310["text"] = "Participant 310"
-        participant310["relief"] = "ridge"
-        participant310.place(x=50,y=50,width=250,height=75)
-
-        participant311 = tk.Button(
-            self,
-            text="Participant 311",
-            command=lambda: 
-                Jan20_2020.place_forget() & Jan21_2020.place_forget() #controller.show_frame(Paricipant),
-        )
-        participant311["activebackground"] = "#1e90ff"
-        participant311["bg"] = "#00ced1"
-        ft3 = tkFont.Font(family='Times',size=28)
-        participant311["font"] = ft3
-        #participant311["fg"] = "#3S93d49"
-        participant311["justify"] = "center"
-        participant311["text"] = "Participant 311"
-        participant311["relief"] = "ridge"
-        participant311.place(x=50,y=150,width=250,height=75)
-        #participant311.pack(padx=10, pady=10)
-
-        participant312 = tk.Button(
-            self,
-            text="Participant 312",
-            command=lambda: controller.show_frame(Paricipant),
-        )
-        participant312["activebackground"] = "#1e90ff"
-        participant312["bg"] = "#00ced1"
-        ft4 = tkFont.Font(family='Times',size=28)
-        participant312["font"] = ft4
-        #participant312["fg"] = "#3S93d49"
-        participant312["justify"] = "center"
-        participant312["text"] = "Participant 312"
-        participant312["relief"] = "ridge"
-        participant312.place(x=50,y=250,width=250,height=75)
-        #participant312.pack(side = BOTTOM, padx=10, pady=10)
-
-        Jan18_2020 = tk.Button(
-            self,
-            text="2020-01-18",
-            command=lambda: controller.show_frame(Paricipant),
-        )
-        Jan18_2020["activebackground"] = "#1e90ff"
-        Jan18_2020["bg"] = "#00ced1"
-        ft5 = tkFont.Font(family='Times',size=28)
-        Jan18_2020["font"] = ft5
-        #Jan18_2020["fg"] = "#3S93d49"
-        Jan18_2020["justify"] = "center"
-        Jan18_2020["text"] = "2020-01-18"
-        Jan18_2020["relief"] = "ridge"
-        Jan18_2020.place(x=350,y=50,width=200,height=50)
-
-        Jan19_2020 = tk.Button(
-            self,
-            text="2020-01-19",
-            command=lambda: controller.show_frame(Paricipant),
-        )
-        Jan19_2020["activebackground"] = "#1e90ff"
-        Jan19_2020["bg"] = "#00ced1"
-        ft6 = tkFont.Font(family='Times',size=28)
-        Jan19_2020["font"] = ft6
-        #Jan19_2020["fg"] = "#3S93d49"
-        Jan19_2020["justify"] = "center"
-        Jan19_2020["text"] = "2020-01-19"
-        Jan19_2020["relief"] = "ridge"
-        Jan19_2020.place(x=350,y=125,width=200,height=50)
-
-        Jan20_2020 = tk.Button(
-            self,
-            text="2020-01-20",
-            command=lambda: participant311.place_forget()
-        )
-        Jan20_2020["activebackground"] = "#1e90ff"
-        Jan20_2020["bg"] = "#00ced1"
-        ft7 = tkFont.Font(family='Times',size=28)
-        Jan20_2020["font"] = ft7
-        #Jan20_2020["fg"] = "#3S93d49"
-        Jan20_2020["justify"] = "center"
-        Jan20_2020["text"] = "2020-01-20"
-        Jan20_2020["relief"] = "ridge"
-        Jan20_2020.place(x=350,y=200,width=200,height=50)
-
-        Jan21_2020 = tk.Button(
-            self,
-            text="2020-01-21",
-            command=lambda: participant311.place_forget()
-        )
-        Jan21_2020["activebackground"] = "#1e90ff"
-        Jan21_2020["bg"] = "#00ced1"
-        ft8 = tkFont.Font(family='Times',size=28)
-        Jan21_2020["font"] = ft8
-        #Jan21_2020["fg"] = "#3S93d49"
-        Jan21_2020["justify"] = "center"
-        Jan21_2020["text"] = "2020-01-21"
-        Jan21_2020["relief"] = "ridge"
-        Jan21_2020.place(x=350,y=275,width=200,height=50)
-
+        self.dates1()
+        self.clicked=[]
+        self.tclicked=''
         SelectAttriutesPage = tk.Button(
             self,
             command=lambda: controller.show_frame(SelectDataAttributes),
@@ -198,7 +92,109 @@ class Paricipant(tk.Frame):
         SelectAttriutesPage["justify"] = "center"
         SelectAttriutesPage["text"] = "Select Data Attributes"
         SelectAttriutesPage["relief"] = "ridge"
-        SelectAttriutesPage.place(x=100,y=350,width=400,height=75)
+        SelectAttriutesPage.place(x=110,y=350,width=400,height=75)
+        
+    def dates1(self):
+        self.participant310 = tk.Button(self,text="Participant 310")
+        self.participant311 = tk.Button(self,text="Participant 311")
+        self.participant312 = tk.Button(self,text="Participant 312")
+        self.participant310["activebackground"] = ["#00ced1"]
+        self.participant310["bg"] = "#00ced1"
+        ft2 = tkFont.Font(family='Times',size=28)
+        self.participant310["font"] = ft2
+        self.participant310["fg"] = "#393d49"
+        self.participant310["justify"] = "center"
+        self.participant310["relief"] = "ridge"
+
+        self.participant311["activebackground"] = ["#00ced1"]
+        self.participant311["bg"] = "#00ced1"
+        ft2 = tkFont.Font(family='Times',size=28)
+        self.participant311["font"] = ft2
+        self.participant311["fg"] = "#393d49"
+        self.participant311["justify"] = "center"
+        self.participant311["relief"] = "ridge"
+
+        self.participant312["activebackground"] = ["#00ced1"]
+        self.participant312["bg"] = "#00ced1"
+        ft2 = tkFont.Font(family='Times',size=28)
+        self.participant312["font"] = ft2
+        self.participant312["fg"] = "#393d49"
+        self.participant312["justify"] = "center"
+        self.participant312["relief"] = "ridge"
+
+        self.Jan18_2020 = tk.Button(self,text="2020-01-18")
+        self.Jan18_2020.config(command= lambda btn=self.Jan18_2020: self.showall(btn))
+        self.Jan18_2020.grid(row=1,column=0,padx=10, pady=5)
+ 
+        self.Jan19_2020 = tk.Button(self,text="2020-01-19")
+        self.Jan19_2020.config(command=lambda btn=self.Jan19_2020: self.showall(btn))
+        self.Jan19_2020.grid(row=2,column=0,padx=10, pady=5)
+
+        self.Jan20_2020 = tk.Button(self,text="2020-01-20")
+        self.Jan20_2020.config(command=lambda btn=self.Jan20_2020: self.parts(btn))
+        self.Jan20_2020.grid(row=3,column=0,padx=10, pady=5)
+
+        self.Jan21_2020 = tk.Button(self,text="2020-01-21")
+        self.Jan21_2020.config(command=lambda btn=self.Jan21_2020: self.parts(btn))
+        self.Jan21_2020.grid(row=4,column=0,padx=10, pady=5)
+        self.Jan21_2020["activebackground"] = "#00ced1"
+        self.Jan21_2020["bg"] = "#00ced1"
+        self.Jan21_2020["font"] = ft2
+        self.Jan21_2020["fg"] = "#393d49"
+        self.Jan21_2020["justify"] = "center"
+        self.Jan21_2020["relief"] = "ridge"
+
+        self.Jan20_2020["activebackground"] = "#00ced1"
+        self.Jan20_2020["bg"] = "#00ced1"
+        self.Jan20_2020["font"] = ft2
+        self.Jan20_2020["fg"] = "#393d49"
+        self.Jan20_2020["justify"] = "center"
+        self.Jan20_2020["relief"] = "ridge"
+
+        self.Jan19_2020["activebackground"] = "#00ced1"
+        self.Jan19_2020["bg"] = "#00ced1"
+        self.Jan19_2020["font"] = ft2
+        self.Jan19_2020["fg"] = "#393d49"
+        self.Jan19_2020["justify"] = "center"
+        self.Jan19_2020["relief"] = "ridge"
+
+        self.Jan18_2020["activebackground"] = "#00ced1"
+        self.Jan18_2020["bg"] = "#00ced1"
+        self.Jan18_2020["font"] = ft2
+        self.Jan18_2020["fg"] = "#393d49"
+        self.Jan18_2020["justify"] = "center"
+        self.Jan18_2020["relief"] = "ridge"
+        
+
+    def remove(self,widget1):
+        widget1.grid_remove()
+    def display(self,widget1, widget2, widget3):
+        widget1.grid(column=3, row=1, padx=10, pady=5)
+        widget2.grid(column=3, row=2, padx=10, pady=5)
+        widget3.grid(column=3, row=3, padx=10, pady=5)
+    def display2(self,widget1,widget2):
+        widget1.grid(row=1,column=3,padx=10, pady=5)
+        widget2.grid(row=3,column=3,padx=10, pady=5)
+    # def exist(self,widget):
+    #     print("Checking for existence = ", bool(widget.winfo_exists()))
+    def parts(self, btn):
+        text = btn.cget("text")
+        text = text.replace('-', '')
+        if(text == "20200120" or text == "20200121"):
+            self.display2(self.participant310,self.participant312)
+        if(bool(self.participant311.winfo_exists()) == True):
+            print("checking")
+            self.remove(self.participant311)
+    def showall(self,btn):
+        text = btn.cget("text")
+        text = text.replace('-', '')
+        self.clicked.append(text)
+        if(len(self.clicked) > 1):
+            self.clicked.pop(0)
+        #print("clicked:", text)   
+        print("clicked:", self.clicked)
+        if(text == "20200118" or text == "20200119"):
+            self.display(self.participant310,self.participant311,self.participant312)
 
 
 
