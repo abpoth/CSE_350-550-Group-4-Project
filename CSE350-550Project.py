@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import *
 import tkinter.font as tkFont
 
+from testgraph import g1
+
 class windows(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
@@ -79,6 +81,8 @@ class Paricipant(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.dates1()
         self.clicked=[]
+        self.clicked2=[]
+        print("data is : ", self.clicked)
         self.tclicked=''
         SelectAttriutesPage = tk.Button(
             self,
@@ -96,8 +100,11 @@ class Paricipant(tk.Frame):
         
     def dates1(self):
         self.participant310 = tk.Button(self,text="Participant 310")
+        self.participant310.config(command=lambda btn1=self.participant310: self.get_fname(btn1))
         self.participant311 = tk.Button(self,text="Participant 311")
+        self.participant311.config(command=lambda btn1=self.participant311: self.get_fname(btn1))
         self.participant312 = tk.Button(self,text="Participant 312")
+        self.participant312.config(command=lambda btn1=self.participant312: self.get_fname(btn1))
         self.participant310["activebackground"] = ["#00ced1"]
         self.participant310["bg"] = "#00ced1"
         ft2 = tkFont.Font(family='Times',size=28)
@@ -180,10 +187,14 @@ class Paricipant(tk.Frame):
     def parts(self, btn):
         text = btn.cget("text")
         text = text.replace('-', '')
+        self.clicked.append(text)
+        if(len(self.clicked) > 1):
+            self.clicked.pop(0)
+        print("clicked:", self.clicked)
         if(text == "20200120" or text == "20200121"):
             self.display2(self.participant310,self.participant312)
         if(bool(self.participant311.winfo_exists()) == True):
-            print("checking")
+            #print("removing 311")
             self.remove(self.participant311)
     def showall(self,btn):
         text = btn.cget("text")
@@ -195,6 +206,20 @@ class Paricipant(tk.Frame):
         print("clicked:", self.clicked)
         if(text == "20200118" or text == "20200119"):
             self.display(self.participant310,self.participant311,self.participant312)
+    def get_fname(self,btn1):
+        text = btn1.cget("text")
+        if(text == "Participant 310"):
+            text = "310"
+        elif(text == "Participant 311"):
+            text = "311"
+        elif(text == "Participant 312"):
+            text = "312"
+        
+        text = text.replace('-', '')
+        self.clicked2.append(text)
+        if(len(self.clicked2) > 1):
+            self.clicked2.pop(0)
+        print("here", self.clicked," : ",self.clicked2)
 
 
 
@@ -349,7 +374,7 @@ class SelectDataAttributes(tk.Frame):
         ShowData = tk.Button(
             self,
             text="Show Data",
-            command=lambda: controller.show_frame(MainScreen),
+            command=lambda: (g1()),
         )
         ShowData["activebackground"] = "#9b60ad"
         ShowData["bg"] = "#c71585"
