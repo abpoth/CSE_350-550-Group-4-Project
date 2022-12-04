@@ -5,9 +5,9 @@ import math
 import pandas as pd
 
 def g1(): #filename, start, end, group, ect
-    date_t = (r'\20200118')
-    participant = (r'\310')
-    filename =  (r"Dataset"+date_t+participant+"\summary.csv")
+    date_t = (r'/20200118')
+    participant = (r'/310')
+    filename =  open("Dataset"+date_t+participant+"/summary.csv")
     df = pd.read_csv(filename, skiprows=[1])
     x = ("Datetime (UTC)")
     # Placing the plots in the plane

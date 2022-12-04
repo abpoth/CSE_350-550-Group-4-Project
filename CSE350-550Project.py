@@ -1,27 +1,35 @@
 import tkinter as tk
 from tkinter import *
 import tkinter.font as tkFont
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import numpy as np
+import math
+import pandas as pd
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,NavigationToolbar2Tk)
 
-from testgraph import g1
+mpl.use('TkAgg')
+
 
 class windows(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
         # Adding a title to the window
         self.wm_title("Main Screen")
-        width = 600
-        height = 500
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_rowconfigure(0, weight=1)
+        # width = 800
+        # height = 800
         # creating a frame and assigning it to container
         
-        screenWidth = self.winfo_screenwidth()
-        screenHeight = self.winfo_screenheight()
-        align = '%dx%d+%d+%d' % (width, height, (screenWidth - width)/2, (screenHeight - height)/2)
-        self.geometry(align)
+        # screenWidth = self.winfo_screenwidth()
+        # screenHeight = self.winfo_screenheight()
+        #align = '%dx%d+%d+%d' % (width, height, (screenWidth - width)/2, (screenHeight - height)/2)
         # 
-        container = tk.Frame(self, height=600, width=500)
+        container = tk.Frame(self)
         # specifying the region where the frame is packed in root
         #container.pack(side="top", fill="both", expand=True)
-        container.pack(side = TOP)
+        container.grid(row=0,column=0)
         # configuring the location of the container using grid
         #container.grid_rowconfigure(0, weight=1)
         #container.grid_columnconfigure(0, weight=1)
@@ -29,7 +37,7 @@ class windows(tk.Tk):
         # We will now create a dictionary of frames
         self.frames = {}
         # we'll create the frames themselves later but let's add the components to the dictionary.
-        for F in (MainScreen, Paricipant, SelectDataAttributes):
+        for F in (MainScreen, Paricipant, SelectDataAttributes, ShowGraph):
             frame = F(container, self)
 
             # the windows class acts as the root window for the frames.
@@ -79,6 +87,7 @@ class MainScreen(tk.Frame):
 class Paricipant(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        
         self.dates1()
         self.clicked=[]
         self.clicked2=[]
@@ -90,13 +99,13 @@ class Paricipant(tk.Frame):
         )
         SelectAttriutesPage["activebackground"] = "#9b60ad"
         SelectAttriutesPage["bg"] = "#c71585"
-        ft8 = tkFont.Font(family='Times',size=28)
+        ft8 = tkFont.Font(family='Times',size=22)
         SelectAttriutesPage["font"] = ft8
         #SelectAttriutesPage["fg"] = "#3S93d49"
         SelectAttriutesPage["justify"] = "center"
         SelectAttriutesPage["text"] = "Select Data Attributes"
         SelectAttriutesPage["relief"] = "ridge"
-        SelectAttriutesPage.place(x=110,y=350,width=400,height=75)
+        SelectAttriutesPage.place(x = 10, y=370,width=500,height=75)
         
     def dates1(self):
         self.participant310 = tk.Button(self,text="Participant 310")
@@ -131,19 +140,19 @@ class Paricipant(tk.Frame):
 
         self.Jan18_2020 = tk.Button(self,text="2020-01-18")
         self.Jan18_2020.config(command= lambda btn=self.Jan18_2020: self.showall(btn))
-        self.Jan18_2020.grid(row=1,column=0,padx=10, pady=5)
+        self.Jan18_2020.grid(row=1,column=0,padx=1, pady=10)
  
         self.Jan19_2020 = tk.Button(self,text="2020-01-19")
         self.Jan19_2020.config(command=lambda btn=self.Jan19_2020: self.showall(btn))
-        self.Jan19_2020.grid(row=2,column=0,padx=10, pady=5)
+        self.Jan19_2020.grid(row=2,column=0,padx=1, pady=10)
 
         self.Jan20_2020 = tk.Button(self,text="2020-01-20")
         self.Jan20_2020.config(command=lambda btn=self.Jan20_2020: self.parts(btn))
-        self.Jan20_2020.grid(row=3,column=0,padx=10, pady=5)
+        self.Jan20_2020.grid(row=3,column=0,padx=1, pady=10)
 
         self.Jan21_2020 = tk.Button(self,text="2020-01-21")
         self.Jan21_2020.config(command=lambda btn=self.Jan21_2020: self.parts(btn))
-        self.Jan21_2020.grid(row=4,column=0,padx=10, pady=5)
+        self.Jan21_2020.grid(row=4,column=0,padx=1, pady=10)
         self.Jan21_2020["activebackground"] = "#00ced1"
         self.Jan21_2020["bg"] = "#00ced1"
         self.Jan21_2020["font"] = ft2
@@ -176,12 +185,12 @@ class Paricipant(tk.Frame):
     def remove(self,widget1):
         widget1.grid_remove()
     def display(self,widget1, widget2, widget3):
-        widget1.grid(column=3, row=1, padx=10, pady=5)
-        widget2.grid(column=3, row=2, padx=10, pady=5)
-        widget3.grid(column=3, row=3, padx=10, pady=5)
+        widget1.grid(column=3, row=1, padx=1, pady=10)
+        widget2.grid(column=3, row=2, padx=1, pady=10)
+        widget3.grid(column=3, row=3, padx=1, pady=10)
     def display2(self,widget1,widget2):
-        widget1.grid(row=1,column=3,padx=10, pady=5)
-        widget2.grid(row=3,column=3,padx=10, pady=5)
+        widget1.grid(row=1,column=3,padx=1, pady=10)
+        widget2.grid(row=3,column=3,padx=1, pady=10)
     # def exist(self,widget):
     #     print("Checking for existence = ", bool(widget.winfo_exists()))
     def parts(self, btn):
@@ -374,7 +383,7 @@ class SelectDataAttributes(tk.Frame):
         ShowData = tk.Button(
             self,
             text="Show Data",
-            command=lambda: (g1()),
+            command=lambda: (controller.show_frame(ShowGraph))
         )
         ShowData["activebackground"] = "#9b60ad"
         ShowData["bg"] = "#c71585"
@@ -384,8 +393,81 @@ class SelectDataAttributes(tk.Frame):
         ShowData["justify"] = "center"
         ShowData["text"] = "Show Data"
         ShowData["relief"] = "ridge"
-        ShowData.pack(side=BOTTOM, fill="both")
+        ShowData.place(x = 10, y=370,width=500,height=75)
 
+
+
+
+class ShowGraph(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        redo1 = tk.Button(
+            self,
+            text="Show Data",
+            command=lambda: controller.show_frame(MainScreen),
+        )
+        redo1["activebackground"] = "#9b60ad"
+        redo1["bg"] = "#c71585"
+        ft3 = tkFont.Font(family='Times',size=22)
+        redo1["font"] = ft3
+        
+        
+        redo1["fg"] = "#393d49"
+        redo1["justify"] = "center"
+        redo1["text"] = "redo"
+        redo1["relief"] = "ridge"
+        redo1.place(x = 10, y=370,width=500,height=75)
+    
+        #self.graph()
+    def graph(self):
+        rcp = mpl.rcParams
+        rcp['lines.linewidth'] = 2.0
+        rcp['lines.markeredgewidth'] = 1.0
+        rcp['axes.labelsize'] = 2
+        rcp['font.size'] = 6
+        rcp['patch.linewidth'] = 1.0
+        rcp['figure.facecolor'] = 'white'
+        rcp['figure.edgecolor'] = 'white'
+        
+        #rcp['toolbar']= True
+        date_t = (r'/20200118')
+        participant = (r'/310')
+        filename =  open("Dataset"+date_t+participant+"/summary.csv")
+
+        df = pd.read_csv(filename, skiprows=[1])
+        x = ("Datetime (UTC)")
+
+        # Placing the plots in the plane
+
+        row, cols = 7,1
+        fig, ax = plt.subplots(figsize=(7,7), dpi=100,nrows=row,ncols=cols, sharex=True)
+        fig.subplots_adjust(hspace=1, wspace=.5,bottom=.1,top=1)
+        p1 = ax[0];p2 = ax[1];p3 = ax[2];p4 = ax[3];p5 = ax[4]
+        p6 = ax[5];p7 = ax[6]
+        fromx = 0; tox1 = 1405
+        df.iloc[fromx:tox1].plot(x, "Acc magnitude avg",ax=p1)
+        df.iloc[fromx:tox1].plot(x, "Eda avg", ax=p2)
+        df.iloc[fromx:tox1].plot(x, "Temp avg", ax=p3)
+        df.iloc[fromx:tox1].plot(x, "Movement intensity", ax=p4)
+        df.iloc[fromx:tox1].plot(x, "Steps count", ax=p5)
+        df.iloc[fromx:tox1].plot(x, "Rest", ax=p6)
+        
+        # Packing all the plots and displaying them
+        # plt.tight_layout()
+        # plt.show()
+
+        canvas = FigureCanvasTkAgg(fig, master=self)
+        # #canvas.draw()
+        canvas.get_tk_widget().pack(side=BOTTOM, fill='both', expand=True)
+
+
+        # toolbar = NavigationToolbar2Tk(canvas, self)
+        # toolbar.update()
+        # canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
 if __name__ == "__main__":
+
     testObj = windows()
+    testObj.geometry("800x800")
+
     testObj.mainloop()
