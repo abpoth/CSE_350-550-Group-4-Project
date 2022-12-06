@@ -272,7 +272,7 @@ class SelectDataAttributes(tk.Frame):
         )
         MagnitudeAvg["activebackground"] = "#1e90ff"
         MagnitudeAvg["bg"] = "#00ced1"
-        ft3 = tkFont.Font(family='Times',size=12)
+        ft3 = tkFont.Font(family='Times',size=28)
         MagnitudeAvg["font"] = ft3
         MagnitudeAvg["fg"] = "#393d49"
         MagnitudeAvg["justify"] = "center"
@@ -283,7 +283,7 @@ class SelectDataAttributes(tk.Frame):
         mag_avg_operators = OptionMenu(frame1, StringVar(), "Null", ">", ">", "=")
         mag_avg_operators.grid(padx=10,pady=10,row=1,column=1)
 
-        mag_avg_input = tk.Text(frame1, height=5, width=10)
+        mag_avg_input = tk.Text(frame1, height=2, width=20)
         mag_avg_input.grid(padx=10,pady=10,row=1,column=2)
 
         EdaAvg = tk.Button(
@@ -293,7 +293,7 @@ class SelectDataAttributes(tk.Frame):
         )
         EdaAvg["activebackground"] = "#1e90ff"
         EdaAvg["bg"] = "#00ced1"
-        ft3 = tkFont.Font(family='Times',size=12)
+        ft3 = tkFont.Font(family='Times',size=28)
         EdaAvg["font"] = ft3
         EdaAvg["fg"] = "#393d49"
         EdaAvg["justify"] = "center"
@@ -304,7 +304,7 @@ class SelectDataAttributes(tk.Frame):
         eda_avg_operators = OptionMenu(frame1, StringVar(), "Null", ">", ">", "=")
         eda_avg_operators.grid(padx=10,pady=10,row=2,column=1)
 
-        eda_avg_input = tk.Text(frame1, height=5, width=10)
+        eda_avg_input = tk.Text(frame1, height=2, width=20)
         eda_avg_input.grid(padx=10,pady=10,row=2,column=2)
 
         TempAvg = tk.Button(
@@ -314,7 +314,7 @@ class SelectDataAttributes(tk.Frame):
         )
         TempAvg["activebackground"] = "#1e90ff"
         TempAvg["bg"] = "#00ced1"
-        ft3 = tkFont.Font(family='Times',size=12)
+        ft3 = tkFont.Font(family='Times',size=28)
         TempAvg["font"] = ft3
         TempAvg["fg"] = "#393d49"
         TempAvg["justify"] = "center"
@@ -325,7 +325,7 @@ class SelectDataAttributes(tk.Frame):
         temp_avg_operators = OptionMenu(frame1, StringVar(), "Null", ">", ">", "=")
         temp_avg_operators.grid(padx=10,pady=10,row=3,column=1)
 
-        temp_avg_input = tk.Text(frame1, height=5, width=10)
+        temp_avg_input = tk.Text(frame1, height=2, width=20)
         temp_avg_input.grid(padx=10,pady=10,row=3,column=2)
 
         Movement = tk.Button(
@@ -335,7 +335,7 @@ class SelectDataAttributes(tk.Frame):
         )
         Movement["activebackground"] = "#1e90ff"
         Movement["bg"] = "#00ced1"
-        ft3 = tkFont.Font(family='Times',size=12)
+        ft3 = tkFont.Font(family='Times',size=28)
         Movement["font"] = ft3
         Movement["fg"] = "#393d49"
         Movement["justify"] = "center"
@@ -346,7 +346,7 @@ class SelectDataAttributes(tk.Frame):
         movement_operators = OptionMenu(frame1, StringVar(), "Null", ">", ">", "=")
         movement_operators.grid(padx=10,pady=10,row=4,column=1)
 
-        movement_input = tk.Text(frame1, height=5, width=10)
+        movement_input = tk.Text(frame1, height=2, width=20)
         movement_input.grid(padx=10,pady=10,row=4,column=2)
 
         StepCount = tk.Button(
@@ -356,7 +356,7 @@ class SelectDataAttributes(tk.Frame):
         )
         StepCount["activebackground"] = "#1e90ff"
         StepCount["bg"] = "#00ced1"
-        ft3 = tkFont.Font(family='Times',size=12)
+        ft3 = tkFont.Font(family='Times',size=28)
         StepCount["font"] = ft3
         StepCount["fg"] = "#393d49"
         StepCount["justify"] = "center"
@@ -367,7 +367,7 @@ class SelectDataAttributes(tk.Frame):
         step_operators = OptionMenu(frame1, StringVar(), "Null", ">", ">", "=")
         step_operators.grid(padx=10,pady=10,row=5,column=1)
 
-        step_input = tk.Text(frame1, height=5, width=10)
+        step_input = tk.Text(frame1, height=2, width=20)
         step_input.grid(padx=10,pady=10,row=5,column=2)
 
         Rest = tk.Button(
@@ -377,7 +377,7 @@ class SelectDataAttributes(tk.Frame):
         )
         Rest["activebackground"] = "#1e90ff"
         Rest["bg"] = "#00ced1"
-        ft3 = tkFont.Font(family='Times',size=12)
+        ft3 = tkFont.Font(family='Times',size=28)
         Rest["font"] = ft3
         Rest["fg"] = "#393d49"
         Rest["justify"] = "center"
@@ -388,8 +388,8 @@ class SelectDataAttributes(tk.Frame):
         rest_operators = OptionMenu(frame1, StringVar(), "Null", ">", ">", "=")
         rest_operators.grid(padx=10,pady=10,row=6,column=1)
 
-        rest_input = tk.Text(frame1, height=5, width=10)
-        rest_input.grid(padx=10,pady=10,row=6,column=2)
+        rest_input = tk.Text(frame1, height=2, width=20)
+        rest_input.grid(padx=10,pady=10,row=6,column=2,columnspan=4)
 
         ShowData = tk.Button(
             self,
@@ -404,7 +404,7 @@ class SelectDataAttributes(tk.Frame):
         ShowData["justify"] = "center"
         ShowData["text"] = "Show Data"
         ShowData["relief"] = "ridge"
-        ShowData.grid(row= 7,column=0,padx=1, pady=10, sticky=EW, columnspan=4)
+        ShowData.grid(row= 7,column=0,padx=1, pady=10, sticky=EW, columnspan=6)
 
 
 
