@@ -99,7 +99,7 @@ class Paricipant(tk.Frame):
         )
         SelectAttriutesPage["activebackground"] = "#9b60ad"
         SelectAttriutesPage["bg"] = "#c71585"
-        ft8 = tkFont.Font(family='Times',size=22)
+        ft8 = tkFont.Font(family='Times',size=28)
         SelectAttriutesPage["font"] = ft8
         #SelectAttriutesPage["fg"] = "#3S93d49"
         SelectAttriutesPage["justify"] = "center"
@@ -246,7 +246,7 @@ class SelectDataAttributes(tk.Frame):
         tk.Frame.__init__(self, parent)
         
         frame1 = Frame(self, highlightbackground="blue", highlightthickness=2)
-        frame1.grid(padx=10,pady=10,row=0,column=0)#pack(side=LEFT,fill=Y)
+        frame1.grid(padx=10,pady=100,row=0,column=0)#pack(side=LEFT,fill=Y)
         label1 = tk.Label(frame1, text="Select Attribute(s)")
         ft1 = tkFont.Font(family='Times',size=14)
         label1["font"] = ft1
@@ -398,7 +398,7 @@ class SelectDataAttributes(tk.Frame):
         )
         ShowData["activebackground"] = "#9b60ad"
         ShowData["bg"] = "#c71585"
-        ft3 = tkFont.Font(family='Times',size=22)
+        ft3 = tkFont.Font(family='Times',size=28)
         ShowData["font"] = ft3
         ShowData["fg"] = "#393d49"
         ShowData["justify"] = "center"
@@ -420,7 +420,7 @@ class ShowGraph(tk.Frame):
         )
         redo1["activebackground"] = "#9b60ad"
         redo1["bg"] = "#c71585"
-        ft3 = tkFont.Font(family='Times',size=22)
+        ft3 = tkFont.Font(family='Times',size=28)
         redo1["font"] = ft3
         
         
@@ -428,15 +428,15 @@ class ShowGraph(tk.Frame):
         redo1["justify"] = "center"
         redo1["text"] = "redo"
         redo1["relief"] = "ridge"
-        redo1.pack()
+        redo1.grid(row= 7,column=0,padx=1, pady=1, sticky=EW, columnspan=6)
     
-        #self.graph()
+        self.graph()
     def graph(self):
         rcp = mpl.rcParams
         rcp['lines.linewidth'] = 2.0
         rcp['lines.markeredgewidth'] = 1.0
         rcp['axes.labelsize'] = 2
-        rcp['font.size'] = 6
+        rcp['font.size'] = 7
         rcp['patch.linewidth'] = 1.0
         rcp['figure.facecolor'] = 'white'
         rcp['figure.edgecolor'] = 'white'
@@ -470,7 +470,7 @@ class ShowGraph(tk.Frame):
 
         canvas = FigureCanvasTkAgg(fig, master=self)
         # #canvas.draw()
-        canvas.get_tk_widget().pack(side=BOTTOM, fill='both', expand=True)
+        canvas.get_tk_widget().grid(row= 0,column=0,padx=1, pady=1, sticky=N, columnspan=6)#pack(side=BOTTOM, fill='both', expand=True)
 
 
         # toolbar = NavigationToolbar2Tk(canvas, self)
