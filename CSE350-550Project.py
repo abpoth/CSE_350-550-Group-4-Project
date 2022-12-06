@@ -18,8 +18,8 @@ class windows(tk.Tk):
         self.wm_title("Main Screen")
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
-        # width = 800
-        # height = 800
+        # width = 1200
+        # height = 1200
         # creating a frame and assigning it to container
         
         # screenWidth = self.winfo_screenwidth()
@@ -31,8 +31,8 @@ class windows(tk.Tk):
         #container.pack(side="top", fill="both", expand=True)
         container.grid(row=0,column=0)
         # configuring the location of the container using grid
-        #container.grid_rowconfigure(0, weight=1)
-        #container.grid_columnconfigure(0, weight=1)
+        # container.grid_rowconfigure(0, weight=1)
+        # container.grid_columnconfigure(0, weight=1)
 
         # We will now create a dictionary of frames
         self.frames = {}
@@ -105,14 +105,22 @@ class Paricipant(tk.Frame):
         SelectAttriutesPage["justify"] = "center"
         SelectAttriutesPage["text"] = "Select Data Attributes"
         SelectAttriutesPage["relief"] = "ridge"
-        SelectAttriutesPage.place(x = 10, y=370,width=500,height=75)
+        SelectAttriutesPage.grid(row= 1,column=0,padx=1, pady=10, sticky=EW, columnspan=4)#pack(side=BOTTOM,expand=True, fill=BOTH,  anchor=S)
+
+        
         
     def dates1(self):
-        self.participant310 = tk.Button(self,text="Participant 310")
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_rowconfigure(0, weight=1)
+        self.frame1 = Frame(self, highlightbackground="blue", highlightthickness=2)
+        self.frame1.grid(row=0,column=0)#pack(side=LEFT,fill=Y)
+        self.frame2 = Frame(self, highlightbackground="blue", highlightthickness=2)
+        self.frame2.grid(row=0,column=1)#pack(side=RIGHT, fill=Y)
+        self.participant310 = tk.Button(self.frame1,text="Participant 310")
         self.participant310.config(command=lambda btn1=self.participant310: self.get_fname(btn1))
-        self.participant311 = tk.Button(self,text="Participant 311")
+        self.participant311 = tk.Button(self.frame1,text="Participant 311")
         self.participant311.config(command=lambda btn1=self.participant311: self.get_fname(btn1))
-        self.participant312 = tk.Button(self,text="Participant 312")
+        self.participant312 = tk.Button(self.frame1,text="Participant 312")
         self.participant312.config(command=lambda btn1=self.participant312: self.get_fname(btn1))
         self.participant310["activebackground"] = ["#00ced1"]
         self.participant310["bg"] = "#00ced1"
@@ -138,21 +146,21 @@ class Paricipant(tk.Frame):
         self.participant312["justify"] = "center"
         self.participant312["relief"] = "ridge"
 
-        self.Jan18_2020 = tk.Button(self,text="2020-01-18")
+        self.Jan18_2020 = tk.Button(self.frame1,text="2020-01-18")
         self.Jan18_2020.config(command= lambda btn=self.Jan18_2020: self.showall(btn))
-        self.Jan18_2020.grid(row=1,column=0,padx=1, pady=10)
+        self.Jan18_2020.grid(row=1,column=1, padx=10,pady=10)
  
-        self.Jan19_2020 = tk.Button(self,text="2020-01-19")
+        self.Jan19_2020 = tk.Button(self.frame1,text="2020-01-19")
         self.Jan19_2020.config(command=lambda btn=self.Jan19_2020: self.showall(btn))
-        self.Jan19_2020.grid(row=2,column=0,padx=1, pady=10)
+        self.Jan19_2020.grid(row=2,column=1, padx=10,pady=10)
 
-        self.Jan20_2020 = tk.Button(self,text="2020-01-20")
+        self.Jan20_2020 = tk.Button(self.frame1,text="2020-01-20")
         self.Jan20_2020.config(command=lambda btn=self.Jan20_2020: self.parts(btn))
-        self.Jan20_2020.grid(row=3,column=0,padx=1, pady=10)
+        self.Jan20_2020.grid(row=3,column=1, padx=10,pady=10)
 
-        self.Jan21_2020 = tk.Button(self,text="2020-01-21")
+        self.Jan21_2020 = tk.Button(self.frame1,text="2020-01-21")
         self.Jan21_2020.config(command=lambda btn=self.Jan21_2020: self.parts(btn))
-        self.Jan21_2020.grid(row=4,column=0,padx=1, pady=10)
+        self.Jan21_2020.grid(row=4,column=1, padx=10,pady=10)
         self.Jan21_2020["activebackground"] = "#00ced1"
         self.Jan21_2020["bg"] = "#00ced1"
         self.Jan21_2020["font"] = ft2
@@ -185,12 +193,13 @@ class Paricipant(tk.Frame):
     def remove(self,widget1):
         widget1.grid_remove()
     def display(self,widget1, widget2, widget3):
-        widget1.grid(column=3, row=1, padx=1, pady=10)
-        widget2.grid(column=3, row=2, padx=1, pady=10)
-        widget3.grid(column=3, row=3, padx=1, pady=10)
+        widget1.grid(row=1,column=2, padx=10,pady=10)
+        widget2.grid(row=2,column=2, padx=10,pady=10)
+        widget3.grid(row=3,column=2, padx=10,pady=10)
+        
     def display2(self,widget1,widget2):
-        widget1.grid(row=1,column=3,padx=1, pady=10)
-        widget2.grid(row=3,column=3,padx=1, pady=10)
+        widget1.grid(row=1,column=2, padx=10,pady=10)
+        widget2.grid(row=3,column=2, padx=10,pady=10)
     # def exist(self,widget):
     #     print("Checking for existence = ", bool(widget.winfo_exists()))
     def parts(self, btn):
@@ -236,26 +245,28 @@ class SelectDataAttributes(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         
-        label1 = tk.Label(self, text="Select Attribute(s)")
+        frame1 = Frame(self, highlightbackground="blue", highlightthickness=2)
+        frame1.grid(padx=10,pady=10,row=0,column=0)#pack(side=LEFT,fill=Y)
+        label1 = tk.Label(frame1, text="Select Attribute(s)")
         ft1 = tkFont.Font(family='Times',size=14)
         label1["font"] = ft1
         label1["justify"] = "center"
-        label1.place(x=25,y=25,width=200,height=40)
+        label1.grid(padx=10,pady=10,row=0,column=0)
 
-        label2 = tk.Label(self, text="Query Operator(s)")
+        label2 = tk.Label(frame1, text="Query Operator(s)")
         ft1 = tkFont.Font(family='Times',size=14)
         label2["font"] = ft1
         label2["justify"] = "center"
-        label2.place(x=250,y=25,width=200,height=40)
+        label2.grid(padx=10,pady=10,row=0,column=1)
 
-        label3 = tk.Label(self, text="Input(s)")
+        label3 = tk.Label(frame1, text="Input(s)")
         ft1 = tkFont.Font(family='Times',size=14)
         label3["font"] = ft1
         label3["justify"] = "center"
-        label3.place(x=400,y=25,width=200,height=40)
+        label3.grid(padx=10,pady=10,row=0,column=2)
 
         MagnitudeAvg = tk.Button(
-            self,
+            frame1,
             text="Acc Magnitude Avg",
          #   command=lambda: controller.show_frame(Paricipant),
         )
@@ -267,16 +278,16 @@ class SelectDataAttributes(tk.Frame):
         MagnitudeAvg["justify"] = "center"
         MagnitudeAvg["text"] = "Acc Magnitude Avg"
         MagnitudeAvg["relief"] = "ridge"
-        MagnitudeAvg.place(x=50,y=75,width=150,height=40)
+        MagnitudeAvg.grid(padx=10,pady=10,row=1,column=0)
 
-        mag_avg_operators = OptionMenu(self, StringVar(), "Null", ">", ">", "=")
-        mag_avg_operators.place(x=325,y=75,width=50,height=40)
+        mag_avg_operators = OptionMenu(frame1, StringVar(), "Null", ">", ">", "=")
+        mag_avg_operators.grid(padx=10,pady=10,row=1,column=1)
 
-        mag_avg_input = tk.Text(self, height=5, width=10)
-        mag_avg_input.place(x=475,y=75,width=50,height=40)
+        mag_avg_input = tk.Text(frame1, height=5, width=10)
+        mag_avg_input.grid(padx=10,pady=10,row=1,column=2)
 
         EdaAvg = tk.Button(
-            self,
+            frame1,
             text="Eda Avg",
         #    command=lambda: controller.show_frame(Paricipant),
         )
@@ -288,16 +299,16 @@ class SelectDataAttributes(tk.Frame):
         EdaAvg["justify"] = "center"
         EdaAvg["text"] = "Eda Avg"
         EdaAvg["relief"] = "ridge"
-        EdaAvg.place(x=75,y=125,width=100,height=40)
+        EdaAvg.grid(padx=10,pady=10,row=2,column=0)
 
-        eda_avg_operators = OptionMenu(self, StringVar(), "Null", ">", ">", "=")
-        eda_avg_operators.place(x=325,y=125,width=50,height=40)
+        eda_avg_operators = OptionMenu(frame1, StringVar(), "Null", ">", ">", "=")
+        eda_avg_operators.grid(padx=10,pady=10,row=2,column=1)
 
-        eda_avg_input = tk.Text(self, height=5, width=10)
-        eda_avg_input.place(x=475,y=125,width=50,height=40)
+        eda_avg_input = tk.Text(frame1, height=5, width=10)
+        eda_avg_input.grid(padx=10,pady=10,row=2,column=2)
 
         TempAvg = tk.Button(
-            self,
+            frame1,
             text="Temp Avg",
          #   command=lambda: controller.show_frame(Paricipant),
         )
@@ -309,16 +320,16 @@ class SelectDataAttributes(tk.Frame):
         TempAvg["justify"] = "center"
         TempAvg["text"] = "Temp Avg"
         TempAvg["relief"] = "ridge"
-        TempAvg.place(x=75,y=175,width=100,height=40)
+        TempAvg.grid(padx=10,pady=10,row=3,column=0)
 
-        temp_avg_operators = OptionMenu(self, StringVar(), "Null", ">", ">", "=")
-        temp_avg_operators.place(x=325,y=175,width=50,height=40)
+        temp_avg_operators = OptionMenu(frame1, StringVar(), "Null", ">", ">", "=")
+        temp_avg_operators.grid(padx=10,pady=10,row=3,column=1)
 
-        temp_avg_input = tk.Text(self, height=5, width=10)
-        temp_avg_input.place(x=475,y=175,width=50,height=40)
+        temp_avg_input = tk.Text(frame1, height=5, width=10)
+        temp_avg_input.grid(padx=10,pady=10,row=3,column=2)
 
         Movement = tk.Button(
-            self,
+            frame1,
             text="Movement",
          #   command=lambda: controller.show_frame(Paricipant),
         )
@@ -330,16 +341,16 @@ class SelectDataAttributes(tk.Frame):
         Movement["justify"] = "center"
         Movement["text"] = "Movement"
         Movement["relief"] = "ridge"
-        Movement.place(x=75,y=225,width=100,height=40)
+        Movement.grid(padx=10,pady=10,row=4,column=0)
 
-        movement_operators = OptionMenu(self, StringVar(), "Null", ">", ">", "=")
-        movement_operators.place(x=325,y=225,width=50,height=40)
+        movement_operators = OptionMenu(frame1, StringVar(), "Null", ">", ">", "=")
+        movement_operators.grid(padx=10,pady=10,row=4,column=1)
 
-        movement_input = tk.Text(self, height=5, width=10)
-        movement_input.place(x=475,y=225,width=50,height=40)
+        movement_input = tk.Text(frame1, height=5, width=10)
+        movement_input.grid(padx=10,pady=10,row=4,column=2)
 
         StepCount = tk.Button(
-            self,
+            frame1,
             text="Step Count",
          #   command=lambda: controller.show_frame(Paricipant),
         )
@@ -351,16 +362,16 @@ class SelectDataAttributes(tk.Frame):
         StepCount["justify"] = "center"
         StepCount["text"] = "Step Count"
         StepCount["relief"] = "ridge"
-        StepCount.place(x=75,y=275,width=100,height=40) 
+        StepCount.grid(padx=10,pady=10,row=5,column=0) 
 
-        step_operators = OptionMenu(self, StringVar(), "Null", ">", ">", "=")
-        step_operators.place(x=325,y=275,width=50,height=40)
+        step_operators = OptionMenu(frame1, StringVar(), "Null", ">", ">", "=")
+        step_operators.grid(padx=10,pady=10,row=5,column=1)
 
-        step_input = tk.Text(self, height=5, width=10)
-        step_input.place(x=475,y=275,width=50,height=40)
+        step_input = tk.Text(frame1, height=5, width=10)
+        step_input.grid(padx=10,pady=10,row=5,column=2)
 
         Rest = tk.Button(
-            self,
+            frame1,
             text="Rest",
            # command=lambda: controller.show_frame(Paricipant),
         )
@@ -372,13 +383,13 @@ class SelectDataAttributes(tk.Frame):
         Rest["justify"] = "center"
         Rest["text"] = "Rest"
         Rest["relief"] = "ridge"
-        Rest.place(x=75,y=325,width=100,height=40) 
+        Rest.grid(padx=10,pady=10,row=6,column=0) 
 
-        rest_operators = OptionMenu(self, StringVar(), "Null", ">", ">", "=")
-        rest_operators.place(x=325,y=325,width=50,height=40)
+        rest_operators = OptionMenu(frame1, StringVar(), "Null", ">", ">", "=")
+        rest_operators.grid(padx=10,pady=10,row=6,column=1)
 
-        rest_input = tk.Text(self, height=5, width=10)
-        rest_input.place(x=475,y=325,width=50,height=40)
+        rest_input = tk.Text(frame1, height=5, width=10)
+        rest_input.grid(padx=10,pady=10,row=6,column=2)
 
         ShowData = tk.Button(
             self,
@@ -393,7 +404,7 @@ class SelectDataAttributes(tk.Frame):
         ShowData["justify"] = "center"
         ShowData["text"] = "Show Data"
         ShowData["relief"] = "ridge"
-        ShowData.place(x = 10, y=370,width=500,height=75)
+        ShowData.grid(row= 7,column=0,padx=1, pady=10, sticky=EW, columnspan=4)
 
 
 
@@ -417,7 +428,7 @@ class ShowGraph(tk.Frame):
         redo1["justify"] = "center"
         redo1["text"] = "redo"
         redo1["relief"] = "ridge"
-        redo1.place(x = 10, y=370,width=500,height=75)
+        redo1.pack()
     
         #self.graph()
     def graph(self):
@@ -469,5 +480,4 @@ if __name__ == "__main__":
 
     testObj = windows()
     testObj.geometry("800x800")
-
     testObj.mainloop()
