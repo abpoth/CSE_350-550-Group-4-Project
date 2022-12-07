@@ -6,7 +6,8 @@ import matplotlib as mpl
 import numpy as np
 import math
 import pandas as pd
-from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,NavigationToolbar2Tk)
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
+
 
 mpl.use('TkAgg')
 
@@ -445,8 +446,8 @@ class ShowGraph(tk.Frame):
         rcp['figure.edgecolor'] = '#c7d6ed'
         
         #rcp['toolbar']= True
-        date_t = (r'/20200118')
-        participant = (r'/310')
+        date_t =  (r'/20200118') #showall(self) 
+        participant = (r'/310') #get_fname(self)
         filename =  open("Dataset"+date_t+participant+"/summary.csv")
 
         df = pd.read_csv(filename, skiprows=[1])
@@ -467,20 +468,41 @@ class ShowGraph(tk.Frame):
         df.iloc[fromx:tox1].plot(x, "Steps count", ax=p5)
         df.iloc[fromx:tox1].plot(x, "Rest", ax=p6)
         fig.tight_layout()
-        # Packing all the plots and displaying them
-        # plt.tight_layout()
-        # plt.show()
+        # fig.draw()
+        #write program to only call fig.show when the graph is called 
 
+        # fig = plt.figure(figsize=(7,7), dpi=100)  
+        # ax1 = fig.add_subplot(111)
+        # ax1.plot(df.iloc[fromx:tox1]["Datetime (UTC)"], df.iloc[fromx:tox1]["Acc magnitude avg"], label="Acc magnitude avg")
+        # ax1.plot(df.iloc[fromx:tox1]["Datetime (UTC)"], df.iloc[fromx:tox1]["Eda avg"], label="Eda avg")
+        # ax1.plot(df.iloc[fromx:tox1]["Datetime (UTC)"], df.iloc[fromx:tox1]["Temp avg"], label="Temp avg")
+        # ax1.plot(df.iloc[fromx:tox1]["Datetime (UTC)"], df.iloc[fromx:tox1]["Movement intensity"], label="Movement intensity")
+        # ax1.plot(df.iloc[fromx:tox1]["Datetime (UTC)"], df.iloc[fromx:tox1]["Steps count"], label="Steps count")
+        # ax1.plot(df.iloc[fromx:tox1]["Datetime (UTC)"], df.iloc[fromx:tox1]["Rest"], label="Rest")
+        # ax1.legend(loc="upper left")
+        # ax1.set_xlabel("Datetime (UTC)")
+        # ax1.set_ylabel("Values")
+        # ax1.set_title("Graph")
+
+
+        #  working below  
         canvas = FigureCanvasTkAgg(fig, master=self)
-        # #canvas.draw()
-        canvas.get_tk_widget().grid(row= 0,column=0,padx=10, pady=10, sticky=N, columnspan=6)#pack(side=BOTTOM, fill='both', expand=True)
+        canvas.draw()
+        # canvas.get_tk_widget().grid(row= 0,column=0,padx=10, pady=10, sticky=N, columnspan=6)#pack(side=BOTTOM, fill='both', expand=True)
+  
+        # adding scrollbar on right side of canvas
+        scroll_y = tk.Scrollbar(self, orient="vertical", command=canvas.get_tk_widget().yview)
+        scroll_y.grid(row= 0,column=6,padx=10, pady=10, sticky="ns", columnspan=6)
 
+        # canvas.get_tk_widget().configure(yscrollcommand=scroll_y.set, scrollregion=canvas.get_tk_widget().bbox("all"))
 
         # toolbar = NavigationToolbar2Tk(canvas, self)
         # toolbar.update()
-        # canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
+        canvas.get_tk_widget().grid(row= 0,column=0,padx=10, pady=10, sticky=N, columnspan=6)#pack(side=BOTTOM, fill='both', expand=True)
+       
 if __name__ == "__main__":
 
     testObj = windows()
-    testObj.geometry("1200x1200")
+    testObj.geometry("1000x1000")
     testObj.mainloop()
+    # testObj.fig.show(ShowGraph)
