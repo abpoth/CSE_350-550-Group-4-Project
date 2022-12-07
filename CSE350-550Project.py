@@ -27,6 +27,7 @@ class windows(tk.Tk):
         #align = '%dx%d+%d+%d' % (width, height, (screenWidth - width)/2, (screenHeight - height)/2)
         # 
         container = tk.Frame(self)
+        self.configure(background="#c7d6ed")
         # specifying the region where the frame is packed in root
         #container.pack(side="top", fill="both", expand=True)
         container.grid(row=0,column=0)
@@ -43,6 +44,8 @@ class windows(tk.Tk):
             # the windows class acts as the root window for the frames.
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
+            frame.configure(background="#c7d6ed")
+            
 
         # Using a method to switch frames
         self.show_frame(MainScreen)
@@ -437,9 +440,9 @@ class ShowGraph(tk.Frame):
         rcp['lines.markeredgewidth'] = 1.0
         rcp['axes.labelsize'] = 2
         rcp['font.size'] = 7
-        rcp['patch.linewidth'] = 1.0
-        rcp['figure.facecolor'] = 'white'
-        rcp['figure.edgecolor'] = 'white'
+        rcp['patch.linewidth'] = .7
+        rcp['figure.facecolor'] = '#c7d6ed'
+        rcp['figure.edgecolor'] = '#c7d6ed'
         
         #rcp['toolbar']= True
         date_t = (r'/20200118')
@@ -463,14 +466,14 @@ class ShowGraph(tk.Frame):
         df.iloc[fromx:tox1].plot(x, "Movement intensity", ax=p4)
         df.iloc[fromx:tox1].plot(x, "Steps count", ax=p5)
         df.iloc[fromx:tox1].plot(x, "Rest", ax=p6)
-        
+        fig.tight_layout()
         # Packing all the plots and displaying them
         # plt.tight_layout()
         # plt.show()
 
         canvas = FigureCanvasTkAgg(fig, master=self)
         # #canvas.draw()
-        canvas.get_tk_widget().grid(row= 0,column=0,padx=1, pady=1, sticky=N, columnspan=6)#pack(side=BOTTOM, fill='both', expand=True)
+        canvas.get_tk_widget().grid(row= 0,column=0,padx=10, pady=10, sticky=N, columnspan=6)#pack(side=BOTTOM, fill='both', expand=True)
 
 
         # toolbar = NavigationToolbar2Tk(canvas, self)
@@ -479,5 +482,5 @@ class ShowGraph(tk.Frame):
 if __name__ == "__main__":
 
     testObj = windows()
-    testObj.geometry("800x800")
+    testObj.geometry("1200x1200")
     testObj.mainloop()
