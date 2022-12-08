@@ -273,6 +273,8 @@ class Paricipant(tk.Frame):
         #file = open("Dataset/"+de+"/"+pe+"/summary.csv")
         if (clicked and clicked2):
             file = open("Dataset/"+"".join(clicked)+"/"+"".join(clicked2)+"/summary.csv")
+            #df = pd.read_csv('Dataset/20200121/310/summary.csv', skiprows=[1])
+
         else:
             file = open("Dataset/"+"20200118"+"/"+"310"+"/summary.csv")
         return file
@@ -452,13 +454,22 @@ class SelectDataAttributes(tk.Frame):
 
 
 #-----------------------------------------------------------------------------------------------------------------------------------------ShowGraph
-
+filename = ''
+#df = pd.DataFrame()
+#df = pd.read_csv(filename, skiprows=[1])
+df = pd.read_csv
 class ShowGraph(tk.Frame):
+    
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        self.graph()
+        global filename
         global clicked
+        
+        #self.filename
         #global file
         print("been here:", clicked)
+        
         #print(file)
 
         redo1 = tk.Button(
@@ -470,50 +481,54 @@ class ShowGraph(tk.Frame):
         redo1["bg"] = "#c71585"
         ft3 = tkFont.Font(family='Times',size=28)
         redo1["font"] = ft3
-        
-        
         redo1["fg"] = "#393d49"
         redo1["justify"] = "center"
         redo1["text"] = "redo"
         redo1["relief"] = "ridge"
         redo1.grid(row= 7,column=0,padx=1, pady=1, sticky=EW, columnspan=6)
-        self.graph()
         
-    def getfn(f1):
-        global file
-        file = file = open("Dataset/"+"".join(clicked)+"/"+"".join(clicked2)+"/summary.csv")
-
         
     def showit(self):
+        global filename
+        global df
         if(not clicked):
             fw = Paricipant.g1234()
             #filename = open("Dataset"+date_t+participant+"/summary.csv")
             print("not clicked", fw)
+            filename = fw
         else:
             fw = Paricipant.g1234()
             #filename = filename = Paricipant.g1234()
             print("it is clicked: file name:", fw.name)
-        return fw.name
-        #filename =  open("Dataset"+date_t+participant+"/summary.csv")
-        #self.graph(filename)
-    
-        #Paricipant.g1234
-        #pnew = Paricipant()
-    # def showff(parent = Paricipant):
-    #     print("this is clicked okay..",parent.clicked)
+            filename = fw.name
+        if filename == '':
+            df = pd.read_csv('Dataset/20200121/310/summary.csv', skiprows=[1])
+        else:
+            df = pd.read_csv(filename, skiprows=[1])
+        print("this is global fn: ",filename)
+        #return fw.name
+        x = ("Datetime (UTC)")
+
+        row, cols = 7,1
+        fig, ax = plt.subplots(figsize=(7,7), dpi=100,nrows=row,ncols=cols, sharex=True)
+        fig.subplots_adjust(hspace=1, wspace=.5,bottom=.1,top=1)
+        p1 = ax[0];p2 = ax[1];p3 = ax[2];p4 = ax[3];p5 = ax[4]
+        p6 = ax[5];p7 = ax[6]
+        fromx = 0; tox1 = 1405
+        #df = pd.read_csv(filename, skiprows=[1])
+        df.iloc[fromx:tox1].plot(x, "Acc magnitude avg",ax=p1)
+        df.iloc[fromx:tox1].plot(x, "Eda avg", ax=p2)
+        df.iloc[fromx:tox1].plot(x, "Temp avg", ax=p3)
+        df.iloc[fromx:tox1].plot(x, "Movement intensity", ax=p4)
+        df.iloc[fromx:tox1].plot(x, "Steps count", ax=p5)
+        df.iloc[fromx:tox1].plot(x, "Rest", ax=p6)
+        fig.tight_layout()
+        canvas = FigureCanvasTkAgg(fig, master=self)
+        canvas.get_tk_widget().grid(row= 1,column=0,padx=10, pady=10, sticky=N, columnspan=6)
     def graph(self):
         frame1 = Frame(self, highlightbackground="blue", highlightthickness=2)
         frame1.grid(row=0,column=0)#pack(side=LEFT,fill=Y)
-        #filename = fn
-        # self.Parp1 = .g1234(participant)
-        # self.d11 = []
-        # self.dpar = []
-        
-        #def printnames():
-       # self.d11,self.dpar = self.Parp1.g1234()
-        #date_t = date_t
-        #participant = participant
-    
+        global filename
     
         rcp = mpl.rcParams
         rcp['lines.linewidth'] = 2.0
@@ -532,33 +547,16 @@ class ShowGraph(tk.Frame):
             text="Show Selected Graph",
             command= lambda: self.showit()
         )
-        bnt.grid(row=0,column=2,sticky=NE)
-        filename = self.showit()
-        df = pd.read_csv(filename, skiprows=[1])
-        x = ("Datetime (UTC)")
-
-        # Placing the plots in the plane
-
-        row, cols = 7,1
-        fig, ax = plt.subplots(figsize=(7,7), dpi=100,nrows=row,ncols=cols, sharex=True)
-        fig.subplots_adjust(hspace=1, wspace=.5,bottom=.1,top=1)
-        p1 = ax[0];p2 = ax[1];p3 = ax[2];p4 = ax[3];p5 = ax[4]
-        p6 = ax[5];p7 = ax[6]
-        fromx = 0; tox1 = 1405
-        df.iloc[fromx:tox1].plot(x, "Acc magnitude avg",ax=p1)
-        df.iloc[fromx:tox1].plot(x, "Eda avg", ax=p2)
-        df.iloc[fromx:tox1].plot(x, "Temp avg", ax=p3)
-        df.iloc[fromx:tox1].plot(x, "Movement intensity", ax=p4)
-        df.iloc[fromx:tox1].plot(x, "Steps count", ax=p5)
-        df.iloc[fromx:tox1].plot(x, "Rest", ax=p6)
-        fig.tight_layout()
-        # Packing all the plots and displaying them
-        # plt.tight_layout()
-        # plt.show()
-
-        canvas = FigureCanvasTkAgg(fig, master=frame1)
-        
-        canvas.get_tk_widget().grid(row= 0,column=0,padx=10, pady=10, sticky=N, columnspan=6)#pack(side=BOTTOM, fill='both', expand=True)
+        bnt["activebackground"] = "#00ced1"
+        bnt["bg"] = "#00ced1"
+        ft2 = tkFont.Font(family='Times',size=28)
+        bnt["font"] = ft2
+        bnt["fg"] = "#393d49"
+        bnt["justify"] = "center"
+        #bnt["text"] = "Start"
+        bnt["relief"] = "ridge"
+        bnt.grid(row=0,column=0,sticky=NE)
+        #pack(side=BOTTOM, fill='both', expand=True)
        # canvas.draw()
         #toolbar = NavigationToolbar2Tk(canvas, self,) #pack_toolbar=False)
         #toolbar.grid(row= 1,column=0,padx=10, pady=10, sticky=N, columnspan=6)
