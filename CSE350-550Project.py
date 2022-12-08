@@ -485,9 +485,11 @@ class ShowGraph(tk.Frame):
         redo1["justify"] = "center"
         redo1["text"] = "redo"
         redo1["relief"] = "ridge"
-        redo1.grid(row= 7,column=0,padx=1, pady=1, sticky=EW, columnspan=6)
+        redo1.pack(side=BOTTOM)#.grid(row= 7,column=0,padx=1, pady=1, sticky=EW, columnspan=6)
         
-        
+    def remove(self,widget1):
+        widget1.pack_forget()
+
     def showit(self):
         global filename
         global df
@@ -523,11 +525,15 @@ class ShowGraph(tk.Frame):
         df.iloc[fromx:tox1].plot(x, "Steps count", ax=p5)
         df.iloc[fromx:tox1].plot(x, "Rest", ax=p6)
         fig.tight_layout()
-        canvas = FigureCanvasTkAgg(fig, master=self)
-        canvas.get_tk_widget().grid(row= 1,column=0,padx=10, pady=10, sticky=N, columnspan=6)
+        self.canvas = FigureCanvasTkAgg(fig, master=self)
+        self.canvas.get_tk_widget().pack(side= LEFT)#.grid(row= 1,column=0,padx=10, pady=10, sticky=N, columnspan=6)
+        toolbar = NavigationToolbar2Tk(self.canvas, self,) #pack_toolbar=False)
+        toolbar.pack()#.grid(row= 0,column=0,padx=10, pady=10, sticky=N, columnspan=6)
+        if self.canvas > 1:
+            self.canvas.pack_forget()
     def graph(self):
         frame1 = Frame(self, highlightbackground="blue", highlightthickness=2)
-        frame1.grid(row=0,column=0)#pack(side=LEFT,fill=Y)
+        frame1.pack()#.grid(row=0,column=0)#pack(side=LEFT,fill=Y)
         global filename
     
         rcp = mpl.rcParams
@@ -555,11 +561,10 @@ class ShowGraph(tk.Frame):
         bnt["justify"] = "center"
         #bnt["text"] = "Start"
         bnt["relief"] = "ridge"
-        bnt.grid(row=0,column=0,sticky=NE)
+        bnt.pack(side=TOP)#.grid(row=0,column=0,sticky=NE)
         #pack(side=BOTTOM, fill='both', expand=True)
        # canvas.draw()
-        #toolbar = NavigationToolbar2Tk(canvas, self,) #pack_toolbar=False)
-        #toolbar.grid(row= 1,column=0,padx=10, pady=10, sticky=N, columnspan=6)
+        
         # toolbar = NavigationToolbar2Tk(canvas, self)
         # toolbar.update()
         # canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
