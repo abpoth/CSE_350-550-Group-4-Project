@@ -493,6 +493,11 @@ class ShowGraph(tk.Frame):
     def showit(self):
         global filename
         global df
+        try: 
+            self.canvas.get_tk_widget().pack_forget()
+            self.toolbar.pack_forget()
+        except AttributeError: 
+            pass  
         if(not clicked):
             fw = Paricipant.g1234()
             #filename = open("Dataset"+date_t+participant+"/summary.csv")
@@ -527,10 +532,11 @@ class ShowGraph(tk.Frame):
         fig.tight_layout()
         self.canvas = FigureCanvasTkAgg(fig, master=self)
         self.canvas.get_tk_widget().pack(side= LEFT)#.grid(row= 1,column=0,padx=10, pady=10, sticky=N, columnspan=6)
-        toolbar = NavigationToolbar2Tk(self.canvas, self,) #pack_toolbar=False)
-        toolbar.pack()#.grid(row= 0,column=0,padx=10, pady=10, sticky=N, columnspan=6)
-        if self.canvas > 1:
-            self.canvas.pack_forget()
+        self.toolbar = NavigationToolbar2Tk(self.canvas,self) #pack_toolbar=False)
+        self.toolbar.pack()#.grid(row= 0,column=0,padx=10, pady=10, sticky=N, columnspan=6)
+        self.toolbar.update()
+        # if self.canvas > 1:
+        #     self.canvas.pack_forget()
     def graph(self):
         frame1 = Frame(self, highlightbackground="blue", highlightthickness=2)
         frame1.pack()#.grid(row=0,column=0)#pack(side=LEFT,fill=Y)
