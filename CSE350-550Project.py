@@ -18,13 +18,14 @@ class windows(tk.Tk):
         self.wm_title("Main Screen")
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
-        # width = 1200
-        # height = 1200
+        width = 1200
+        height = 1200
         # creating a frame and assigning it to container
         
-        # screenWidth = self.winfo_screenwidth()
-        # screenHeight = self.winfo_screenheight()
-        #align = '%dx%d+%d+%d' % (width, height, (screenWidth - width)/2, (screenHeight - height)/2)
+        screenWidth = self.winfo_screenwidth()
+        screenHeight = self.winfo_screenheight()
+        align = '%dx%d+%d+%d' % (width, height, (screenWidth - width)/2, (screenHeight - height)/2)
+        self.geometry(align)
         # 
         container = tk.Frame(self)
         self.configure(background="#c7d6ed")
@@ -531,9 +532,9 @@ class ShowGraph(tk.Frame):
         df.iloc[fromx:tox1].plot(x, "Rest", ax=p6)
         fig.tight_layout()
         self.canvas = FigureCanvasTkAgg(fig, master=self)
-        self.canvas.get_tk_widget().pack(side= LEFT)#.grid(row= 1,column=0,padx=10, pady=10, sticky=N, columnspan=6)
+        self.canvas.get_tk_widget().pack(side= TOP)#.grid(row= 1,column=0,padx=10, pady=10, sticky=N, columnspan=6)
         self.toolbar = NavigationToolbar2Tk(self.canvas,self) #pack_toolbar=False)
-        self.toolbar.pack()#.grid(row= 0,column=0,padx=10, pady=10, sticky=N, columnspan=6)
+        self.toolbar.pack(side=BOTTOM)#.grid(row= 0,column=0,padx=10, pady=10, sticky=N, columnspan=6)
         self.toolbar.update()
         # if self.canvas > 1:
         #     self.canvas.pack_forget()
@@ -541,7 +542,30 @@ class ShowGraph(tk.Frame):
         frame1 = Frame(self, highlightbackground="blue", highlightthickness=2)
         frame1.pack()#.grid(row=0,column=0)#pack(side=LEFT,fill=Y)
         global filename
-    
+        Lb1 = Listbox(self)
+        Lb1.insert(1, "Home/Reset -- h or r or home/n")
+        Lb1.insert(2, "Back -- c or left arrow or backspace")
+        Lb1.insert(3, "Forward	-- v or right arrow")
+        Lb1.insert(4, "/n")
+        Lb1.insert(5, "JSP")
+        Lb1.insert(6, "Ruby")
+
+        #Lb1.pack(side=RIGHT)
+        label = tk.Label(self, text="""Home/Reset -- h or r or home/n
+Back -- c or left arrow or backspace/n
+Forward	-- v or right arrow/n
+Pan/Zoom-- p/n
+Zoom-to-rect -- o/n
+Save -- ctrl + s /n
+Toggle fullscreen -- f or ctrl + f /n
+Close plot -- ctrl + w /n
+Close all plots	-- shift + w""", anchor='w')
+        ft1 = tkFont.Font(family='Times',size=15)
+        label["font"] = ft1
+        label["justify"] = "center"
+        #label.place(x=50,y=50,width=515,height=147)
+        label.pack(side= LEFT)
+
         rcp = mpl.rcParams
         rcp['lines.linewidth'] = 2.0
         rcp['lines.markeredgewidth'] = 1.0
@@ -577,5 +601,5 @@ class ShowGraph(tk.Frame):
 if __name__ == "__main__":
 
     testObj = windows()
-    testObj.geometry("1200x1200")
+    #testObj.geometry("1200x1200")
     testObj.mainloop()
