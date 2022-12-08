@@ -18,8 +18,8 @@ class windows(tk.Tk):
         self.wm_title("Main Screen")
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
-        width = 1200
-        height = 1200
+        width = 700
+        height = 700
         # creating a frame and assigning it to container
         
         screenWidth = self.winfo_screenwidth()
@@ -66,7 +66,7 @@ class MainScreen(tk.Frame):
         label["font"] = ft1
         label["justify"] = "center"
         #label.place(x=50,y=50,width=515,height=147)
-        label.pack(padx=100, pady=100)
+        label.pack(padx=100, pady=50)
         #label.pack()
 
         # We use the switch_window_button in order to call the show_frame() method as a lambda function
@@ -77,7 +77,7 @@ class MainScreen(tk.Frame):
         )
         StartButton["activebackground"] = "#00ced1"
         StartButton["bg"] = "#00ced1"
-        ft2 = tkFont.Font(family='Times',size=28)
+        ft2 = tkFont.Font(family='Times',size=20)
         StartButton["font"] = ft2
         StartButton["fg"] = "#393d49"
         StartButton["justify"] = "center"
@@ -109,13 +109,13 @@ class Paricipant(tk.Frame):
         )
         SelectAttriutesPage["activebackground"] = "#9b60ad"
         SelectAttriutesPage["bg"] = "#c71585"
-        ft8 = tkFont.Font(family='Times',size=28)
+        ft8 = tkFont.Font(family='Times',size=20)
         SelectAttriutesPage["font"] = ft8
         #SelectAttriutesPage["fg"] = "#3S93d49"
         SelectAttriutesPage["justify"] = "center"
         SelectAttriutesPage["text"] = "Select Data Attributes"
         SelectAttriutesPage["relief"] = "ridge"
-        SelectAttriutesPage.grid(row= 1,column=0,padx=1, pady=10, sticky=EW, columnspan=4)#pack(side=BOTTOM,expand=True, fill=BOTH,  anchor=S)
+        SelectAttriutesPage.grid(row= 1,column=0,padx=1, pady=5, sticky=EW, columnspan=4)#pack(side=BOTTOM,expand=True, fill=BOTH,  anchor=S)
 
         
         
@@ -134,7 +134,7 @@ class Paricipant(tk.Frame):
         self.participant312.config(command=lambda btn1=self.participant312: self.get_fname(btn1))
         self.participant310["activebackground"] = ["#00ced1"]
         self.participant310["bg"] = "#00ced1"
-        ft2 = tkFont.Font(family='Times',size=28)
+        ft2 = tkFont.Font(family='Times',size=20)
         self.participant310["font"] = ft2
         self.participant310["fg"] = "#393d49"
         self.participant310["justify"] = "center"
@@ -142,7 +142,7 @@ class Paricipant(tk.Frame):
 
         self.participant311["activebackground"] = ["#00ced1"]
         self.participant311["bg"] = "#00ced1"
-        ft2 = tkFont.Font(family='Times',size=28)
+        ft2 = tkFont.Font(family='Times',size=20)
         self.participant311["font"] = ft2
         self.participant311["fg"] = "#393d49"
         self.participant311["justify"] = "center"
@@ -150,7 +150,7 @@ class Paricipant(tk.Frame):
 
         self.participant312["activebackground"] = ["#00ced1"]
         self.participant312["bg"] = "#00ced1"
-        ft2 = tkFont.Font(family='Times',size=28)
+        ft2 = tkFont.Font(family='Times',size=20)
         self.participant312["font"] = ft2
         self.participant312["fg"] = "#393d49"
         self.participant312["justify"] = "center"
@@ -158,19 +158,19 @@ class Paricipant(tk.Frame):
 
         self.Jan18_2020 = tk.Button(self.frame1,text="2020-01-18")
         self.Jan18_2020.config(command= lambda btn=self.Jan18_2020: self.showall(btn))
-        self.Jan18_2020.grid(row=1,column=1, padx=10,pady=10)
+        self.Jan18_2020.grid(row=1,column=1, padx=10,pady=5)
  
         self.Jan19_2020 = tk.Button(self.frame1,text="2020-01-19")
         self.Jan19_2020.config(command=lambda btn=self.Jan19_2020: self.showall(btn))
-        self.Jan19_2020.grid(row=2,column=1, padx=10,pady=10)
+        self.Jan19_2020.grid(row=2,column=1, padx=10,pady=5)
 
         self.Jan20_2020 = tk.Button(self.frame1,text="2020-01-20")
         self.Jan20_2020.config(command=lambda btn=self.Jan20_2020: self.parts(btn))
-        self.Jan20_2020.grid(row=3,column=1, padx=10,pady=10)
+        self.Jan20_2020.grid(row=3,column=1, padx=10,pady=5)
 
         self.Jan21_2020 = tk.Button(self.frame1,text="2020-01-21")
         self.Jan21_2020.config(command=lambda btn=self.Jan21_2020: self.parts(btn))
-        self.Jan21_2020.grid(row=4,column=1, padx=10,pady=10)
+        self.Jan21_2020.grid(row=4,column=1, padx=10,pady=5)
         self.Jan21_2020["activebackground"] = "#00ced1"
         self.Jan21_2020["bg"] = "#00ced1"
         self.Jan21_2020["font"] = ft2
@@ -203,13 +203,13 @@ class Paricipant(tk.Frame):
     def remove(self,widget1):
         widget1.grid_remove()
     def display(self,widget1, widget2, widget3):
-        widget1.grid(row=1,column=2, padx=10,pady=10)
-        widget2.grid(row=2,column=2, padx=10,pady=10)
-        widget3.grid(row=3,column=2, padx=10,pady=10)
+        widget1.grid(row=1,column=2, padx=10,pady=5)
+        widget2.grid(row=2,column=2, padx=10,pady=5)
+        widget3.grid(row=3,column=2, padx=10,pady=5)
         
     def display2(self,widget1,widget2):
-        widget1.grid(row=1,column=2, padx=10,pady=10)
-        widget2.grid(row=3,column=2, padx=10,pady=10)
+        widget1.grid(row=1,column=2, padx=10,pady=5)
+        widget2.grid(row=3,column=2, padx=10,pady=5)
     # def exist(self,widget):
     #     print("Checking for existence = ", bool(widget.winfo_exists()))
     def parts(self, btn):
@@ -290,24 +290,24 @@ class SelectDataAttributes(tk.Frame):
         tk.Frame.__init__(self, parent)
         
         frame1 = Frame(self, highlightbackground="blue", highlightthickness=2)
-        frame1.grid(padx=10,pady=100,row=0,column=0)#pack(side=LEFT,fill=Y)
+        frame1.grid(padx=10,pady=50,row=0,column=0)#pack(side=LEFT,fill=Y)
         label1 = tk.Label(frame1, text="Select Attribute(s)")
         ft1 = tkFont.Font(family='Times',size=14)
         label1["font"] = ft1
         label1["justify"] = "center"
-        label1.grid(padx=10,pady=10,row=0,column=0)
+        label1.grid(padx=10,pady=5,row=0,column=0)
 
         label2 = tk.Label(frame1, text="Query Operator(s)")
         ft1 = tkFont.Font(family='Times',size=14)
         label2["font"] = ft1
         label2["justify"] = "center"
-        label2.grid(padx=10,pady=10,row=0,column=1)
+        label2.grid(padx=10,pady=5,row=0,column=1)
 
         label3 = tk.Label(frame1, text="Input(s)")
         ft1 = tkFont.Font(family='Times',size=14)
         label3["font"] = ft1
         label3["justify"] = "center"
-        label3.grid(padx=10,pady=10,row=0,column=2)
+        label3.grid(padx=10,pady=5,row=0,column=2)
 
         MagnitudeAvg = tk.Button(
             frame1,
@@ -316,19 +316,19 @@ class SelectDataAttributes(tk.Frame):
         )
         MagnitudeAvg["activebackground"] = "#1e90ff"
         MagnitudeAvg["bg"] = "#00ced1"
-        ft3 = tkFont.Font(family='Times',size=28)
+        ft3 = tkFont.Font(family='Times',size=20)
         MagnitudeAvg["font"] = ft3
         MagnitudeAvg["fg"] = "#393d49"
         MagnitudeAvg["justify"] = "center"
         MagnitudeAvg["text"] = "Acc Magnitude Avg"
         MagnitudeAvg["relief"] = "ridge"
-        MagnitudeAvg.grid(padx=10,pady=10,row=1,column=0)
+        MagnitudeAvg.grid(padx=10,pady=5,row=1,column=0)
 
         mag_avg_operators = OptionMenu(frame1, StringVar(), "Null", ">", ">", "=")
-        mag_avg_operators.grid(padx=10,pady=10,row=1,column=1)
+        mag_avg_operators.grid(padx=10,pady=5,row=1,column=1)
 
         mag_avg_input = tk.Text(frame1, height=2, width=20)
-        mag_avg_input.grid(padx=10,pady=10,row=1,column=2)
+        mag_avg_input.grid(padx=10,pady=5,row=1,column=2)
 
         EdaAvg = tk.Button(
             frame1,
@@ -337,19 +337,19 @@ class SelectDataAttributes(tk.Frame):
         )
         EdaAvg["activebackground"] = "#1e90ff"
         EdaAvg["bg"] = "#00ced1"
-        ft3 = tkFont.Font(family='Times',size=28)
+        ft3 = tkFont.Font(family='Times',size=20)
         EdaAvg["font"] = ft3
         EdaAvg["fg"] = "#393d49"
         EdaAvg["justify"] = "center"
         EdaAvg["text"] = "Eda Avg"
         EdaAvg["relief"] = "ridge"
-        EdaAvg.grid(padx=10,pady=10,row=2,column=0)
+        EdaAvg.grid(padx=10,pady=5,row=2,column=0)
 
         eda_avg_operators = OptionMenu(frame1, StringVar(), "Null", ">", ">", "=")
-        eda_avg_operators.grid(padx=10,pady=10,row=2,column=1)
+        eda_avg_operators.grid(padx=10,pady=5,row=2,column=1)
 
         eda_avg_input = tk.Text(frame1, height=2, width=20)
-        eda_avg_input.grid(padx=10,pady=10,row=2,column=2)
+        eda_avg_input.grid(padx=10,pady=5,row=2,column=2)
 
         TempAvg = tk.Button(
             frame1,
@@ -358,19 +358,19 @@ class SelectDataAttributes(tk.Frame):
         )
         TempAvg["activebackground"] = "#1e90ff"
         TempAvg["bg"] = "#00ced1"
-        ft3 = tkFont.Font(family='Times',size=28)
+        ft3 = tkFont.Font(family='Times',size=20)
         TempAvg["font"] = ft3
         TempAvg["fg"] = "#393d49"
         TempAvg["justify"] = "center"
         TempAvg["text"] = "Temp Avg"
         TempAvg["relief"] = "ridge"
-        TempAvg.grid(padx=10,pady=10,row=3,column=0)
+        TempAvg.grid(padx=10,pady=5,row=3,column=0)
 
         temp_avg_operators = OptionMenu(frame1, StringVar(), "Null", ">", ">", "=")
-        temp_avg_operators.grid(padx=10,pady=10,row=3,column=1)
+        temp_avg_operators.grid(padx=10,pady=5,row=3,column=1)
 
         temp_avg_input = tk.Text(frame1, height=2, width=20)
-        temp_avg_input.grid(padx=10,pady=10,row=3,column=2)
+        temp_avg_input.grid(padx=10,pady=5,row=3,column=2)
 
         Movement = tk.Button(
             frame1,
@@ -379,19 +379,19 @@ class SelectDataAttributes(tk.Frame):
         )
         Movement["activebackground"] = "#1e90ff"
         Movement["bg"] = "#00ced1"
-        ft3 = tkFont.Font(family='Times',size=28)
+        ft3 = tkFont.Font(family='Times',size=20)
         Movement["font"] = ft3
         Movement["fg"] = "#393d49"
         Movement["justify"] = "center"
         Movement["text"] = "Movement"
         Movement["relief"] = "ridge"
-        Movement.grid(padx=10,pady=10,row=4,column=0)
+        Movement.grid(padx=10,pady=5,row=4,column=0)
 
         movement_operators = OptionMenu(frame1, StringVar(), "Null", ">", ">", "=")
-        movement_operators.grid(padx=10,pady=10,row=4,column=1)
+        movement_operators.grid(padx=10,pady=5,row=4,column=1)
 
         movement_input = tk.Text(frame1, height=2, width=20)
-        movement_input.grid(padx=10,pady=10,row=4,column=2)
+        movement_input.grid(padx=10,pady=5,row=4,column=2)
 
         StepCount = tk.Button(
             frame1,
@@ -400,19 +400,19 @@ class SelectDataAttributes(tk.Frame):
         )
         StepCount["activebackground"] = "#1e90ff"
         StepCount["bg"] = "#00ced1"
-        ft3 = tkFont.Font(family='Times',size=28)
+        ft3 = tkFont.Font(family='Times',size=20)
         StepCount["font"] = ft3
         StepCount["fg"] = "#393d49"
         StepCount["justify"] = "center"
         StepCount["text"] = "Step Count"
         StepCount["relief"] = "ridge"
-        StepCount.grid(padx=10,pady=10,row=5,column=0) 
+        StepCount.grid(padx=10,pady=5,row=5,column=0) 
 
         step_operators = OptionMenu(frame1, StringVar(), "Null", ">", ">", "=")
-        step_operators.grid(padx=10,pady=10,row=5,column=1)
+        step_operators.grid(padx=10,pady=5,row=5,column=1)
 
         step_input = tk.Text(frame1, height=2, width=20)
-        step_input.grid(padx=10,pady=10,row=5,column=2)
+        step_input.grid(padx=10,pady=5,row=5,column=2)
 
         Rest = tk.Button(
             frame1,
@@ -421,19 +421,19 @@ class SelectDataAttributes(tk.Frame):
         )
         Rest["activebackground"] = "#1e90ff"
         Rest["bg"] = "#00ced1"
-        ft3 = tkFont.Font(family='Times',size=28)
+        ft3 = tkFont.Font(family='Times',size=20)
         Rest["font"] = ft3
         Rest["fg"] = "#393d49"
         Rest["justify"] = "center"
         Rest["text"] = "Rest"
         Rest["relief"] = "ridge"
-        Rest.grid(padx=10,pady=10,row=6,column=0) 
+        Rest.grid(padx=10,pady=5,row=6,column=0) 
 
         rest_operators = OptionMenu(frame1, StringVar(), "Null", ">", ">", "=")
-        rest_operators.grid(padx=10,pady=10,row=6,column=1)
+        rest_operators.grid(padx=10,pady=5,row=6,column=1)
 
         rest_input = tk.Text(frame1, height=2, width=20)
-        rest_input.grid(padx=10,pady=10,row=6,column=2,columnspan=4)
+        rest_input.grid(padx=10,pady=5,row=6,column=2,columnspan=4)
 
        
             #return self.d11,self.dpar
@@ -445,13 +445,13 @@ class SelectDataAttributes(tk.Frame):
         )
         ShowData["activebackground"] = "#9b60ad"
         ShowData["bg"] = "#c71585"
-        ft3 = tkFont.Font(family='Times',size=28)
+        ft3 = tkFont.Font(family='Times',size=20)
         ShowData["font"] = ft3
         ShowData["fg"] = "#393d49"
         ShowData["justify"] = "center"
         ShowData["text"] = "Show Data"
         ShowData["relief"] = "ridge"
-        ShowData.grid(row= 7,column=0,padx=1, pady=10, sticky=EW, columnspan=6)
+        ShowData.grid(row= 7,column=0,padx=1, pady=5, sticky=EW, columnspan=6)
 
 
 #-----------------------------------------------------------------------------------------------------------------------------------------ShowGraph
@@ -480,7 +480,7 @@ class ShowGraph(tk.Frame):
         )
         redo1["activebackground"] = "#9b60ad"
         redo1["bg"] = "#c71585"
-        ft3 = tkFont.Font(family='Times',size=28)
+        ft3 = tkFont.Font(family='Times',size=20)
         redo1["font"] = ft3
         redo1["fg"] = "#393d49"
         redo1["justify"] = "center"
@@ -532,9 +532,9 @@ class ShowGraph(tk.Frame):
         df.iloc[fromx:tox1].plot(x, "Rest", ax=p6)
         fig.tight_layout()
         self.canvas = FigureCanvasTkAgg(fig, master=self)
-        self.canvas.get_tk_widget().pack(side= TOP)#.grid(row= 1,column=0,padx=10, pady=10, sticky=N, columnspan=6)
+        self.canvas.get_tk_widget().pack(side= TOP)#.grid(row= 1,column=0,padx=10, pady=5, sticky=N, columnspan=6)
         self.toolbar = NavigationToolbar2Tk(self.canvas,self) #pack_toolbar=False)
-        self.toolbar.pack(side=BOTTOM)#.grid(row= 0,column=0,padx=10, pady=10, sticky=N, columnspan=6)
+        self.toolbar.pack(side=BOTTOM)#.grid(row= 0,column=0,padx=10, pady=5, sticky=N, columnspan=6)
         self.toolbar.update()
         # if self.canvas > 1:
         #     self.canvas.pack_forget()
@@ -546,25 +546,10 @@ class ShowGraph(tk.Frame):
         Lb1.insert(1, "Home/Reset -- h or r or home/n")
         Lb1.insert(2, "Back -- c or left arrow or backspace")
         Lb1.insert(3, "Forward	-- v or right arrow")
-        Lb1.insert(4, "/n")
-        Lb1.insert(5, "JSP")
-        Lb1.insert(6, "Ruby")
-
-        #Lb1.pack(side=RIGHT)
-        label = tk.Label(self, text="""Home/Reset -- h or r or home/n
-Back -- c or left arrow or backspace/n
-Forward	-- v or right arrow/n
-Pan/Zoom-- p/n
-Zoom-to-rect -- o/n
-Save -- ctrl + s /n
-Toggle fullscreen -- f or ctrl + f /n
-Close plot -- ctrl + w /n
-Close all plots	-- shift + w""", anchor='w')
-        ft1 = tkFont.Font(family='Times',size=15)
-        label["font"] = ft1
-        label["justify"] = "center"
-        #label.place(x=50,y=50,width=515,height=147)
-        label.pack(side= LEFT)
+        Lb1.insert(4, "Pan/Zoom-- p")
+        Lb1.insert(5, "Zoom-to-rect -- o")
+        Lb1.insert(6, "Save -- ctrl + s ")
+        Lb1.pack(side=LEFT,  )
 
         rcp = mpl.rcParams
         rcp['lines.linewidth'] = 2.0
@@ -585,7 +570,7 @@ Close all plots	-- shift + w""", anchor='w')
         )
         bnt["activebackground"] = "#00ced1"
         bnt["bg"] = "#00ced1"
-        ft2 = tkFont.Font(family='Times',size=28)
+        ft2 = tkFont.Font(family='Times',size=20)
         bnt["font"] = ft2
         bnt["fg"] = "#393d49"
         bnt["justify"] = "center"
@@ -602,4 +587,6 @@ if __name__ == "__main__":
 
     testObj = windows()
     #testObj.geometry("1200x1200")
+    testObj.rowconfigure(0, weight=1)
+    testObj.columnconfigure(0, weight=1)
     testObj.mainloop()
