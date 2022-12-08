@@ -86,15 +86,21 @@ class MainScreen(tk.Frame):
         #StartButton.pack(side="bottom", fill=tk.X)
         StartButton.pack()
 
+clicked=[]
+clicked2=[]
+
 
 class Paricipant(tk.Frame):
+    
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        
-        self.dates1()
-        self.clicked=[]
-        self.clicked2=[]
-        print("data is : ", self.clicked)
+        global clicked
+        global clicked2
+        #self.dates1()
+        # clicked=[]
+        # clicked2=[]
+        #self.showff()
+        print("data is : ", clicked)
         self.tclicked=''
         SelectAttriutesPage = tk.Button(
             self,
@@ -112,7 +118,7 @@ class Paricipant(tk.Frame):
 
         
         
-    def dates1(self):
+    #def dates1(self):
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
         self.frame1 = Frame(self, highlightbackground="blue", highlightthickness=2)
@@ -206,25 +212,29 @@ class Paricipant(tk.Frame):
     # def exist(self,widget):
     #     print("Checking for existence = ", bool(widget.winfo_exists()))
     def parts(self, btn):
+        global clicked
+        global clicked
         text = btn.cget("text")
         text = text.replace('-', '')
-        self.clicked.append(text)
-        if(len(self.clicked) > 1):
-            self.clicked.pop(0)
-        print("clicked:", self.clicked)
+        clicked.append(text)
+        if(len(clicked) > 1):
+            clicked.pop(0)
+        print("clicked:", clicked)
         if(text == "20200120" or text == "20200121"):
             self.display2(self.participant310,self.participant312)
         if(bool(self.participant311.winfo_exists()) == True):
             #print("removing 311")
             self.remove(self.participant311)
     def showall(self,btn):
+        global clicked
+        global clicked2
         text = btn.cget("text")
         text = text.replace('-', '')
-        self.clicked.append(text)
-        if(len(self.clicked) > 1):
-            self.clicked.pop(0)
-        #print("clicked:", text)   
-        print("clicked:", self.clicked)
+        clicked.append(text)
+        if(len(clicked) > 1):
+            clicked.pop(0)
+        #prclicked:", text)   
+        print("clicked:", clicked)
         if(text == "20200118" or text == "20200119"):
             self.display(self.participant310,self.participant311,self.participant312)
     def get_fname(self,btn1):
@@ -237,10 +247,38 @@ class Paricipant(tk.Frame):
             text = "312"
         
         text = text.replace('-', '')
-        self.clicked2.append(text)
-        if(len(self.clicked2) > 1):
-            self.clicked2.pop(0)
-        print("here", self.clicked," : ",self.clicked2)
+        clicked2.append(text)
+        if(len(clicked2) > 1):
+            clicked2.pop(0)
+        print("here", clicked," : ",clicked2)
+    @classmethod
+    def ttfd():
+        return clicked,clicked2
+    @staticmethod
+    #@classmethod
+    def g1234():
+        global clicked  
+        global clicked2
+        global file
+        #c,c2 = Paricipant.ttfd()
+        clicked = clicked
+        clicked2 = clicked2
+        #Participaclicked
+        print(clicked)
+        date_t = clicked
+        participant = (clicked2)
+        de = "".join(date_t)
+        pe = "".join(participant)
+        de1 = ("r'/",de)
+        #file = open("Dataset/"+de+"/"+pe+"/summary.csv")
+        if (clicked and clicked2):
+            file = open("Dataset/"+"".join(clicked)+"/"+"".join(clicked2)+"/summary.csv")
+        else:
+            file = open("Dataset/"+"20200118"+"/"+"310"+"/summary.csv")
+        return file
+
+        #return(file)
+#        print("".join(date_t),"".join(participant))
 
 
 
@@ -394,6 +432,9 @@ class SelectDataAttributes(tk.Frame):
         rest_input = tk.Text(frame1, height=2, width=20)
         rest_input.grid(padx=10,pady=10,row=6,column=2,columnspan=4)
 
+       
+            #return self.d11,self.dpar
+
         ShowData = tk.Button(
             self,
             text="Show Data",
@@ -410,11 +451,15 @@ class SelectDataAttributes(tk.Frame):
         ShowData.grid(row= 7,column=0,padx=1, pady=10, sticky=EW, columnspan=6)
 
 
-
+#-----------------------------------------------------------------------------------------------------------------------------------------ShowGraph
 
 class ShowGraph(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        global clicked
+        #global file
+        print("been here:", clicked)
+        #print(file)
 
         redo1 = tk.Button(
             self,
@@ -432,9 +477,44 @@ class ShowGraph(tk.Frame):
         redo1["text"] = "redo"
         redo1["relief"] = "ridge"
         redo1.grid(row= 7,column=0,padx=1, pady=1, sticky=EW, columnspan=6)
-    
         self.graph()
+        
+    def getfn(f1):
+        global file
+        file = file = open("Dataset/"+"".join(clicked)+"/"+"".join(clicked2)+"/summary.csv")
+
+        
+    def showit(self):
+        if(not clicked):
+            fw = Paricipant.g1234()
+            #filename = open("Dataset"+date_t+participant+"/summary.csv")
+            print("not clicked", fw)
+        else:
+            fw = Paricipant.g1234()
+            #filename = filename = Paricipant.g1234()
+            print("it is clicked: file name:", fw.name)
+        return fw.name
+        #filename =  open("Dataset"+date_t+participant+"/summary.csv")
+        #self.graph(filename)
+    
+        #Paricipant.g1234
+        #pnew = Paricipant()
+    # def showff(parent = Paricipant):
+    #     print("this is clicked okay..",parent.clicked)
     def graph(self):
+        frame1 = Frame(self, highlightbackground="blue", highlightthickness=2)
+        frame1.grid(row=0,column=0)#pack(side=LEFT,fill=Y)
+        #filename = fn
+        # self.Parp1 = .g1234(participant)
+        # self.d11 = []
+        # self.dpar = []
+        
+        #def printnames():
+       # self.d11,self.dpar = self.Parp1.g1234()
+        #date_t = date_t
+        #participant = participant
+    
+    
         rcp = mpl.rcParams
         rcp['lines.linewidth'] = 2.0
         rcp['lines.markeredgewidth'] = 1.0
@@ -447,8 +527,13 @@ class ShowGraph(tk.Frame):
         #rcp['toolbar']= True
         date_t = (r'/20200118')
         participant = (r'/310')
-        filename =  open("Dataset"+date_t+participant+"/summary.csv")
-
+        
+        bnt = tk.Button(self,
+            text="Show Selected Graph",
+            command= lambda: self.showit()
+        )
+        bnt.grid(row=0,column=2,sticky=NE)
+        filename = self.showit()
         df = pd.read_csv(filename, skiprows=[1])
         x = ("Datetime (UTC)")
 
@@ -471,11 +556,12 @@ class ShowGraph(tk.Frame):
         # plt.tight_layout()
         # plt.show()
 
-        canvas = FigureCanvasTkAgg(fig, master=self)
-        # #canvas.draw()
+        canvas = FigureCanvasTkAgg(fig, master=frame1)
+        
         canvas.get_tk_widget().grid(row= 0,column=0,padx=10, pady=10, sticky=N, columnspan=6)#pack(side=BOTTOM, fill='both', expand=True)
-
-
+       # canvas.draw()
+        #toolbar = NavigationToolbar2Tk(canvas, self,) #pack_toolbar=False)
+        #toolbar.grid(row= 1,column=0,padx=10, pady=10, sticky=N, columnspan=6)
         # toolbar = NavigationToolbar2Tk(canvas, self)
         # toolbar.update()
         # canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
