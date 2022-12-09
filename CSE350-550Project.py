@@ -6,6 +6,8 @@ import matplotlib as mpl
 import numpy as np
 import math
 import pandas as pd
+import datetime as dt
+import matplotlib.dates as mdates
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,NavigationToolbar2Tk)
 
 mpl.use('TkAgg')
@@ -530,6 +532,7 @@ class ShowGraph(tk.Frame):
         df.iloc[fromx:tox1].plot(x, "Movement intensity", ax=p4)
         df.iloc[fromx:tox1].plot(x, "Steps count", ax=p5)
         df.iloc[fromx:tox1].plot(x, "Rest", ax=p6)
+        plt.gca().xaxis.set_major_formatter(mdates.DateFormatter("%b-%d %H:%M"))
         fig.tight_layout()
         self.canvas = FigureCanvasTkAgg(fig, master=self)
         self.canvas.get_tk_widget().pack(side= TOP)#.grid(row= 1,column=0,padx=10, pady=10, sticky=N, columnspan=6)
@@ -598,6 +601,15 @@ Close all plots	-- shift + w""", anchor='w')
         # toolbar = NavigationToolbar2Tk(canvas, self)
         # toolbar.update()
         # canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
+
+    #Convert an input zulu (UTC) time string into something more readable. Returning it:
+    #Didn't end up using this, but it may be helpful?
+    def convertDate(zuluDate):
+        input_format = '%Y-%m-%d %H%MZ' #input example: 2020-01-17T23:48:00Z
+        output_format = '%m-%d:%H%M'
+        date = dt.strptime(zuluDate, input_format) #convert String zuluDate into Datetime, format it
+        return dt.strftime(date, output_format) #convert back to String and return it
+
 if __name__ == "__main__":
 
     testObj = windows()
