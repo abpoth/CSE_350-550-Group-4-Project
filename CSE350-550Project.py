@@ -486,19 +486,23 @@ class ShowGraph(tk.Frame):
         redo1["justify"] = "center"
         redo1["text"] = "redo"
         redo1["relief"] = "ridge"
-        redo1.pack(side=BOTTOM)#.grid(row= 7,column=0,padx=1, pady=1, sticky=EW, columnspan=6)
+        redo1.pack(side=BOTTOM, fill="x")#.grid(row= 7,column=0,padx=1, pady=1, sticky=EW, columnspan=6)
         
     def remove(self,widget1):
         widget1.pack_forget()
 
     def showit(self):
+        frame1 = Frame(self, highlightbackground="blue", highlightthickness=2)
+        frame1.pack(side=TOP)
         global filename
         global df
         try: 
+            self.scroll_y.pack_forget()
             self.canvas.get_tk_widget().pack_forget()
             self.toolbar.pack_forget()
         except AttributeError: 
             pass  
+
         if(not clicked):
             fw = Paricipant.g1234()
             #filename = open("Dataset"+date_t+participant+"/summary.csv")
@@ -531,25 +535,62 @@ class ShowGraph(tk.Frame):
         df.iloc[fromx:tox1].plot(x, "Steps count", ax=p5)
         df.iloc[fromx:tox1].plot(x, "Rest", ax=p6)
         fig.tight_layout()
-        self.canvas = FigureCanvasTkAgg(fig, master=self)
-        self.canvas.get_tk_widget().pack(side= TOP)#.grid(row= 1,column=0,padx=10, pady=5, sticky=N, columnspan=6)
+        self.canvas = FigureCanvasTkAgg(fig, master=frame1)
+        #self.canvas[Scale]
+        self.canvas.get_tk_widget().pack(side= LEFT)#.grid(row= 1,column=0,padx=10, pady=5, sticky=N, columnspan=6)
         self.toolbar = NavigationToolbar2Tk(self.canvas,self) #pack_toolbar=False)
-        self.toolbar.pack(side=BOTTOM)#.grid(row= 0,column=0,padx=10, pady=5, sticky=N, columnspan=6)
+        self.toolbar.pack(side=TOP)#.grid(row= 0,column=0,padx=10, pady=5, sticky=N, columnspan=6)
         self.toolbar.update()
+        self.scroll_y = tk.Scrollbar(frame1, orient="vertical", command=self.canvas.get_tk_widget().yview)
+        self.scroll_y.pack(side=RIGHT, fill="both", expand=True)#grid(row= 0,column=6,padx=10, pady=10, sticky="ns", columnspan=6)
+        #self.scroll_y.update()
+
+
+        # need the below to display graph.
         # if self.canvas > 1:
         #     self.canvas.pack_forget()
     def graph(self):
         frame1 = Frame(self, highlightbackground="blue", highlightthickness=2)
-        frame1.pack()#.grid(row=0,column=0)#pack(side=LEFT,fill=Y)
+        frame1["bg"] = "#00ced1"
+        frame1.pack(side=LEFT)#.grid(row=0,column=0)#pack(side=LEFT,fill=Y)
         global filename
-        Lb1 = Listbox(self)
-        Lb1.insert(1, "Home/Reset -- h or r or home/n")
-        Lb1.insert(2, "Back -- c or left arrow or backspace")
-        Lb1.insert(3, "Forward	-- v or right arrow")
-        Lb1.insert(4, "Pan/Zoom-- p")
-        Lb1.insert(5, "Zoom-to-rect -- o")
-        Lb1.insert(6, "Save -- ctrl + s ")
-        Lb1.pack(side=LEFT,  )
+        
+        me1= ["Home/Reset  ", "h or r or home"]
+        me2= ["Back  ","c or left arrow or backspace"]
+        me3= ["Forward  ","v or right arrow"]
+        me4= ["Pan/Zoom  "," p"]
+        me5= ["Zoom-to-rect  "," o"]
+        me6= ["Save  ","  ctrl + s"]
+        label = tk.Label(frame1, text=me1)
+        # Place the label in the root window
+        label["bg"] = "#00d17d"
+        label.pack(anchor="w")
+        label = tk.Label(frame1, text=me2)
+        # Place the label in the root window
+        label["bg"] = "#00ced1"
+        label.pack(anchor="w")
+        label = tk.Label(frame1, text=me3)
+        # Place the label in the root window
+        label["bg"] = "#00d17d"
+        label.pack(anchor="w")
+        label = tk.Label(frame1, text=me4)
+        # Place the label in the root window
+        label["bg"] = "#00ced1"
+        label.pack(anchor="w")
+        label = tk.Label(frame1, text=me5)
+        # Place the label in the root window
+        label["bg"] = "#00d17d"
+        label.pack(anchor="w")
+        label = tk.Label(frame1, text=me6)
+        label["bg"] = "#00ced1"
+        # Place the label in the root window
+        label.pack(anchor="w")
+
+        
+
+        
+       
+
 
         rcp = mpl.rcParams
         rcp['lines.linewidth'] = 2.0
