@@ -627,7 +627,10 @@ class ShowGraph(tk.Frame):
 if __name__ == "__main__":
 
     testObj = windows()
+
     #testObj.geometry("1200x1200")
-    testObj.rowconfigure(0, weight=1)
-    testObj.columnconfigure(0, weight=1)
+#     testObj.rowconfigure(0, weight=1)
+#     testObj.columnconfigure(0, weight=1)
+# =======
+    testObj.geometry("1200x1200")
     testObj.mainloop()
