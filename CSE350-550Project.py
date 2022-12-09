@@ -492,19 +492,20 @@ class ShowGraph(tk.Frame):
         
     def remove(self,widget1):
         widget1.pack_forget()
-
     def showit(self):
-        frame1 = Frame(self, highlightbackground="blue", highlightthickness=2)
-        frame1.pack(side=TOP)
+        
         global filename
         global df
         try: 
             self.scroll_y.pack_forget()
             self.canvas.get_tk_widget().pack_forget()
             self.toolbar.pack_forget()
+            self.frame1.pack_forget()
         except AttributeError: 
             pass  
-
+        
+        self.frame1 = Frame(self, highlightbackground="blue", highlightthickness=2)
+        self.frame1.pack(side=TOP)
         if(not clicked):
             fw = Paricipant.g1234()
             #filename = open("Dataset"+date_t+participant+"/summary.csv")
@@ -536,15 +537,19 @@ class ShowGraph(tk.Frame):
         df.iloc[fromx:tox1].plot(x, "Movement intensity", ax=p4)
         df.iloc[fromx:tox1].plot(x, "Steps count", ax=p5)
         df.iloc[fromx:tox1].plot(x, "Rest", ax=p6)
+    
+
         plt.gca().xaxis.set_major_formatter(mdates.DateFormatter("%b-%d %H:%M"))
+        
         fig.tight_layout()
-        self.canvas = FigureCanvasTkAgg(fig, master=frame1)
+        self.canvas = FigureCanvasTkAgg(fig, master=self.frame1)
         #self.canvas[Scale]
         self.canvas.get_tk_widget().pack(side= LEFT)#.grid(row= 1,column=0,padx=10, pady=5, sticky=N, columnspan=6)
         self.toolbar = NavigationToolbar2Tk(self.canvas,self) #pack_toolbar=False)
         self.toolbar.pack(side=TOP)#.grid(row= 0,column=0,padx=10, pady=5, sticky=N, columnspan=6)
         self.toolbar.update()
-        self.scroll_y = tk.Scrollbar(frame1, orient="vertical", command=self.canvas.get_tk_widget().yview)
+        self.canvas.draw()
+        self.scroll_y = tk.Scrollbar(self.frame1, orient="vertical", command=self.canvas.get_tk_widget().yview)
         self.scroll_y.pack(side=RIGHT, fill="both", expand=True)#grid(row= 0,column=6,padx=10, pady=10, sticky="ns", columnspan=6)
         #self.scroll_y.update()
 
@@ -621,6 +626,7 @@ class ShowGraph(tk.Frame):
         #bnt["text"] = "Start"
         bnt["relief"] = "ridge"
         bnt.pack(side=TOP)#.grid(row=0,column=0,sticky=NE)
+        #
         #pack(side=BOTTOM, fill='both', expand=True)
        # canvas.draw()
         
@@ -635,7 +641,7 @@ class ShowGraph(tk.Frame):
         output_format = '%m-%d:%H%M'
         date = dt.strptime(zuluDate, input_format) #convert String zuluDate into Datetime, format it
         return dt.strftime(date, output_format) #convert back to String and return it
-
+    
 if __name__ == "__main__":
 
     testObj = windows()
