@@ -632,5 +632,5 @@ if __name__ == "__main__":
 #     testObj.rowconfigure(0, weight=1)
 #     testObj.columnconfigure(0, weight=1)
 # =======
-    testObj.geometry("1200x1200")
+    #testObj.geometry("1200x1200")
     testObj.mainloop()
